@@ -1,10 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -12,11 +7,74 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  createdAt DateTime @default(now())
 
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  password String
-  // posts Post[]
-}   
+  videos    Video[]
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  title       String?
+  sourceUrl   String              // original uploaded/raw video location
+  duration    Float?              // in seconds, filled after processing
+  status      VideoStatus @default(UPLOADED)
+  createdAt   DateTime @default(now())
+
+  clips       Clip[]
+  jobs        Job[]
+}
+
+model Clip {
+  id           String   @id @default(cuid())
+  videoId      String
+  video        Video    @relation(fields: [videoId], references: [id])
+
+  startTime    Float               // seconds into source video
+  endTime      Float
+  outputUrl    String?             // rendered clip location (S3/local)
+  score        Float?              // Claude-assigned highlight score
+  reasoning    String?             // why Claude picked this segment
+  createdAt    DateTime @default(now())
+}
+
+model Job {
+  id          String     @id @default(cuid())
+  videoId     String
+  video       Video      @relation(fields: [videoId], references: [id])
+
+  stage       JobStage
+  status      JobStatus  @default(PENDING)
+  error       String?
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  createdAt   DateTime   @default(now())
+}
+
+enum VideoStatus {
+  UPLOADED
+  PROCESSING
+  DONE
+  FAILED
+}
+
+enum JobStage {
+  TRANSCRIBE
+  HIGHLIGHT_DETECTION
+  REFRAME
+  RENDER
+}
+
+enum JobStatus {
+  PENDING
+  PROCESSING
+  DONE
+  FAILED
+}
