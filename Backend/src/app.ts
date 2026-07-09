@@ -1,5 +1,7 @@
 import express from "express"
 import authRoutes from "./routes/auth.routes.js";
+import urlRoutes from "./routes/url.route.js";
+
 
 
 
@@ -9,7 +11,7 @@ app.use(express.json())
 
 
 app.use("/api/v1", authRoutes)
-
+app.use("/api/v1", urlRoutes)
 app.get("/",(req,res)=>{
     // console.log("Hello, World!")
     res.status(200).json({

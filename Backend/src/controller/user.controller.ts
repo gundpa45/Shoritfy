@@ -1,6 +1,10 @@
+import type { Request,Response } from "express"
+
+async function registerController(req: Request,res:Response){
 
 
-async function registerController(req,res){
+
+    const {name }
 
     res.status(200).json({message:"user register path is ready to test "})
 
@@ -8,7 +12,7 @@ async function registerController(req,res){
 
 
 
-async function loginController(req,res){
+async function loginController(req: Request,res:Response){
     res.status(200).json({
         mesaage:"login path is also redy to test "
     })
