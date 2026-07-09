@@ -1,6 +1,6 @@
-import type { NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
 import {body,validationResult} from "express-validator";
-import { url } from "node:inspector";
+
 
 
 
@@ -15,6 +15,10 @@ function validateUrl(req:Request,res:Response,next:NextFunction){
 
 
 export const urlValidator=[
-   body(url).isURL().withMessage("please enter the valid ur")
+   body("url")
+   .trim()
+   .notEmpty().withMessage("URL is required")
+   .isURL().withMessage("Please enter a valid URL."),
+   validateUrl
     
 ]
