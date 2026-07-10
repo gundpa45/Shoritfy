@@ -20,5 +20,4 @@ export const urlValidator=[
    .notEmpty().withMessage("URL is required")
    .isURL().withMessage("Please enter a valid URL."),
    validateUrl
-    
 ]
