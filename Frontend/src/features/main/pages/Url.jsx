@@ -5,17 +5,33 @@ const Url = () => {
   const [status, setStatus] = useState('idle'); // idle, loading, success
   const [result, setResult] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!url) return;
     
     setStatus('loading');
     
-    // Simulate API call and product-led "doing work" animation
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/v1/url', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to resolve URL');
+      }
+
+      const data = await response.json();
       setStatus('success');
-      setResult('https://www.very-long-original-url.com/article/12345/how-to-build-saas');
-    }, 1500);
+      setResult(data.videoId);
+    } catch (error) {
+      console.error("Error fetching URL:", error);
+      setStatus('idle');
+      alert("Error resolving URL. Make sure it's a valid YouTube link.");
+    }
   };
 
   const resetSearch = () => {

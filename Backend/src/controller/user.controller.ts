@@ -4,7 +4,7 @@ async function registerController(req: Request,res:Response){
 
 
 
-    const {name }
+    // const {name }
 
     res.status(200).json({message:"user register path is ready to test "})
 
