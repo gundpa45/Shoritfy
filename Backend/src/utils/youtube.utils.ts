@@ -1,5 +1,6 @@
 
 
+
  function getVideoId(url:string){
 
     const parsedUrl=new URL(url);
@@ -10,6 +11,10 @@
 
     const videoId=parsedUrl.searchParams.get("v")
 
+
+    if(!videoId){
+        throw new Error("video is not found ")
+    }
     return videoId 
 
 

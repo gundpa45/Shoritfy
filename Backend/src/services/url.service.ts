@@ -8,12 +8,13 @@ async function urlService(url:string){
     // business logic of the shortify
     // extract th ervideo id fro mthe vide of friom link 
 
-    const videoId= getVideoId(url)
+    const videoId=  getVideoId(url)
 
 
 
     return {
-        sucess :true
+        success :true,
+        videoId:videoId,
     }
 }
 
