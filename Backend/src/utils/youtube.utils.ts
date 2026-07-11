@@ -13,7 +13,7 @@
 
 
     if(!videoId){
-        throw new Error("video is not found ")
+        throw new Error("Video ID not found")
     }
     return videoId 
 
