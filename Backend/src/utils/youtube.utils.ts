@@ -1,36 +1,44 @@
-
-
-
- function getVideoId(url:string){
+function getVideoId(url: string) {
+    const parsedUrl = new URL(url);
 
     const validHosts = [
-    "youtube.com",
-    "www.youtube.com",
-    "m.youtube.com",
-    "music.youtube.com",
-    "youtu.be",
-];
+        "youtube.com",
+        "www.youtube.com",
+        "m.youtube.com",
+        "music.youtube.com",
+        "youtu.be",
+    ];
 
-    const parsedUrl=new URL(url);
-
-    if(!validHosts.includes(parsedUrl.hostname)){
-        throw new Error('Invalid youtube url'); 
+    if (!validHosts.includes(parsedUrl.hostname)) {
+        throw new Error("Invalid YouTube URL");
     }
-//     console.log(parsedUrl.pathname);
-// console.log(parsedUrl.searchParams);
 
-    const videoId=parsedUrl.searchParams.get("v")
-
-    // console.log(videoId);
-
-
-    if(!videoId){
-        throw new Error("Video ID not found")
+    // watch?v=
+    if (parsedUrl.searchParams.has("v")) {
+        return parsedUrl.searchParams.get("v")!;
     }
-    return videoId 
 
+    const parts = parsedUrl.pathname.split("/").filter(Boolean);
 
+    // youtu.be/<id>
+    if (parsedUrl.hostname === "youtu.be") {
+        return parts[0];
+    }
+
+    // shorts/<id>
+    if (parts[0] === "shorts") {
+        return parts[1];
+    }
+
+    // embed/<id>
+    if (parts[0] === "embed") {
+        return parts[1];
+    }
+
+    // live/<id>
+    if (parts[0] === "live") {
+        return parts[1];
+    }
+
+    throw new Error("Video ID not found");
 }
-
-
-export default getVideoId
