@@ -1,3 +1,10 @@
+function isValidVideoId(videoId: string): boolean {
+    const regex = /^[a-zA-Z0-9_-]{11}$/;
+
+    return regex.test(videoId);
+}
+
+
 function getVideoId(url: string) {
     const parsedUrl = new URL(url);
 
@@ -15,7 +22,8 @@ function getVideoId(url: string) {
 
     // watch?v=
     if (parsedUrl.searchParams.has("v")) {
-        return parsedUrl.searchParams.get("v")!;
+        const id = parsedUrl.searchParams.get("v")!;
+        if (isValidVideoId(id)) return id;
     }
 
     const parts = parsedUrl.pathname.split("/").filter(Boolean);
@@ -42,3 +50,5 @@ function getVideoId(url: string) {
 
     throw new Error("Video ID not found");
 }
+
+export default getVideoId

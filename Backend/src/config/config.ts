@@ -10,12 +10,12 @@ if(!process.env.YOUTUBE_API_KEY){
 
 type Config = {
     DATABASE_URL: string,
-    YOUTUBE_API_KEY:string,
+    YOUTUBE_API_KEY: string,
 }
 
 const config: Config = {
     DATABASE_URL: process.env.DATABASE_URL,
-    YOUTUBE_API_KEY:process.env.YOUTUBE_API_KEY,    
+    YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
 }
 
 export default config
