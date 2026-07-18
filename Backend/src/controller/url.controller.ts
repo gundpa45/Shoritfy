@@ -18,7 +18,7 @@ async function urlHandler(req: Request, res: Response) {
 
 
     } catch (error: any) {
-        console.log("The url creation has an error", error);
+        console.log("The url creation has an error try real", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
