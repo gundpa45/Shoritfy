@@ -1,5 +1,6 @@
 
 import getVideoId from "../utils/youtube.utils.js";
+import getVideoDetails from "./youtube.service.js";
 
 async function urlService(url:string){
 
@@ -10,12 +11,11 @@ async function urlService(url:string){
 
     const videoId=  getVideoId(url)
 
-
+    const videoDetails= await getVideoDetails(videoId)
 
     return {
         success :true,
-        videoId:videoId,
-        
+       data:videoDetails,
     }
 }
 
