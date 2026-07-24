@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 async function downloadAudio(url: string, videoId: string) {
-    const outputDir = path.join(process.cwd(), "temp", "audio");
+    const outputDir = path.join(process.cwd(), "src/temp", "audio");
 
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
