@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import { urlValidator } from "../validator/url.validator.js";
-import urlController from "../controller/url.controller.js"
+import { urlValidator } from "../validators/url.validator.js";
+import urlController from "../controllers/url.controller.js"
 
 const router = Router();
 
