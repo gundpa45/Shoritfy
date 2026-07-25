@@ -1,6 +1,7 @@
 
 import getVideoId from "../utils/youtube.utils.js";
 import getVideoDetails from "./youtube.service.js";
+import downloadAudio from "./youtube/download.service.js";
 
 async function urlService(url:string){
 
@@ -11,7 +12,8 @@ async function urlService(url:string){
 
     const videoId=  getVideoId(url)
 
-    const videoDetails= await getVideoDetails(videoId)
+    const videoDetails= await getVideoDetails(videoId);
+    const audeioFile= await downloadAudio(url, videoId);
 
     return {
         success :true,
