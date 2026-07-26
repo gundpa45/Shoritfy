@@ -3,7 +3,7 @@ import config from "../config/config.js";
 
 
 
-async function getVideoDetails(videoId: string): Promise<any> {
+async function getVideoDetails(videoId: string | undefined): Promise<any> {
     const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos`, {
         params: {
             part: "snippet,contentDetails",

@@ -3,7 +3,7 @@ import downloadAudio from "../services/youtube/download.service.js";
 import getVideoId from "../utils/youtube.utils.js";
 
 async function youtubePipeline(url: string) {
-    const videoId = getVideoId(url);
+    const videoId: string | undefined = getVideoId(url);
 
     console.log("step : 1");
 

@@ -2,7 +2,7 @@ import youtubedl from "yt-dlp-exec";
 import path from "path";
 import fs from "fs";
 
-async function downloadAudio(url: string, videoId: string) {
+async function downloadAudio(url: string, videoId: string | undefined) {
     const outputDir = path.join(process.cwd(), "src/temp", "audio");
 
     if (!fs.existsSync(outputDir)) {
