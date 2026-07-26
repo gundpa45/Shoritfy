@@ -1,8 +1,7 @@
 
-
-
 import type { Request, Response } from "express";
-import urlService from "../services/url.service.js";
+import youtubePipeline from "../pipeline/youtube.pipeline.js";
+
 
 
 
@@ -11,8 +10,8 @@ async function urlHandler(req: Request, res: Response) {
 
     try {
 
-        const result= await urlService(url)
-       
+        const result= await youtubePipeline(url)
+        console.log("result")
         return res.status(200).json(result);
 
 

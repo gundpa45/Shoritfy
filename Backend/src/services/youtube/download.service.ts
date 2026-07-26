@@ -15,6 +15,7 @@ async function downloadAudio(url: string, videoId: string) {
         extractAudio: true,
         audioFormat: "mp3",
         output: outputPath,
+        noPlaylist: true,   
     });
 
     return path.join(outputDir, `${videoId}.mp3`);
