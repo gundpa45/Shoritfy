@@ -1,3 +1,4 @@
+import getTranscript from "../services/transcript/transcript.service.js";
 import getVideoDetails from "../services/youtube.service.js";
 import downloadAudio from "../services/youtube/download.service.js";
 import getVideoId from "../utils/youtube.utils.js";
@@ -15,12 +16,16 @@ async function youtubePipeline(url: string) {
     const audioFile = await downloadAudio(url, videoId);
       console.log("step : 3");    
     // console.log(audioFile);
+
+    const transcriptFile= await getTranscript(videoId);
+
     return {
         success: true,
         data: {
             videoId,
             videoDetails,
             audioFile,
+            transcriptFile,
         },
     };
 }
