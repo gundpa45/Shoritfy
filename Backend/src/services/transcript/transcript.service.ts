@@ -1,5 +1,5 @@
 
-async function getTranscript(videoId: string) {
+async function getTranscript(videoId: string | undefined) {
     // Implementation for fetching transcript
 }
 
