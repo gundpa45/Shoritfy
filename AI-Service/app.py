@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from api.clip import router as clip_router
+
 
 from schemas.transcript_schema import TranscriptRequest
 from services.transcript_service import generate_transcript
@@ -18,3 +20,5 @@ def home():
 @app.post("/transcribe")
 def transcribe(request: TranscriptRequest):
     return generate_transcript(request.audio_path)
+
+app.include_router(clip_router)
