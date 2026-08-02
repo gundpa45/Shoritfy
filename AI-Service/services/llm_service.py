@@ -11,10 +11,10 @@ def analyze_transcript(segments):
 
     for segment in segments:
         transcript += (
-            f"Start: {segment.start}\n"
-            f"End: {segment.end}\n"
-            f"Text: {segment.text}\n\n"
-        )
+        f"Start: {segment['start']}\n"
+        f"End: {segment['end']}\n"
+        f"Text: {segment['text']}\n\n"
+    )
 
     # 👇 Debug information
     print("=" * 50)
@@ -26,7 +26,7 @@ def analyze_transcript(segments):
 
     response = client.chat(
         model="qwen3",
-        alive="30min",
+        # alive="30min",
         format="json",
         options={
         "temperature": 0

@@ -2,40 +2,99 @@ import os
 import subprocess
 
 
+# Project root (Shortify/)
+PROJECT_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..")
+)
+
+
+# Shared clips directory
+OUTPUT_DIR = os.path.join(
+    PROJECT_ROOT,
+    "temp",
+    "clips"
+)
+
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+
 def cut_clip(
     video_path: str,
     start: float,
     end: float,
     clip_name: str,
 ) -> str:
+    """
+    Cuts a clip from the original video.
 
-    output_dir = "outputs"
-    os.makedirs(output_dir, exist_ok=True)
+    Args:
+        video_path (str): Full path of the original video.
+        start (float): Clip start time (seconds).
+        end (float): Clip end time (seconds).
+        clip_name (str): Output clip name.
 
-    output_file = os.path.join(output_dir, f"{clip_name}.mp4")
+    Returns:
+        str: Full path of generated clip.
+    """
+
+    output_file = os.path.join(
+        OUTPUT_DIR,
+        f"{clip_name}.mp4"
+    )
 
     command = [
         "ffmpeg",
         "-y",
-        "-i", video_path,
-        "-ss", str(start),
-        "-to", str(end),
 
-        "-map", "0:v:0",
-        "-map", "0:a:0",
+        # Input video
+        "-i",
+        video_path,
 
-        "-c:v", "libx264",
-        "-preset", "fast",
-        "-crf", "23",
+        # Clip timestamps
+        "-ss",
+        str(start),
 
-        "-c:a", "aac",
-        "-b:a", "192k",
+        "-to",
+        str(end),
 
-        "-movflags", "+faststart",
+        # Select first video and audio stream
+        "-map",
+        "0:v:0",
 
-        output_file,
+        "-map",
+        "0:a:0",
+
+        # Video encoding
+        "-c:v",
+        "libx264",
+
+        "-preset",
+        "fast",
+
+        "-crf",
+        "23",
+
+        # Audio encoding
+        "-c:a",
+        "aac",
+
+        "-b:a",
+        "192k",
+
+        # Optimize MP4 for streaming
+        "-movflags",
+        "+faststart",
+
+        output_file
     ]
 
+    print("=" * 70)
+    print("Running FFmpeg...")
+    print(" ".join(command))
+    print("=" * 70)
+
     subprocess.run(command, check=True)
+
+    print(f"✅ Clip generated: {output_file}")
 
     return output_file

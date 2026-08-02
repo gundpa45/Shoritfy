@@ -1,12 +1,13 @@
 from services.ffmpeg_service import cut_clip
 
-video_path = r"D:\ME\Projects\Shortify\Backend\src\temp\video\fDiEUxt9l7c.webm"
+
+video_path = r"D:\ME\Projects\Shortify\temp\video\FvkjmoQRApc.webm"
 
 clip = cut_clip(
     video_path=video_path,
     start=10,
-    end=20
+    end=20,
+    clip_name="clip_1"
 )
 
-print("Clip created:")
 print(clip)

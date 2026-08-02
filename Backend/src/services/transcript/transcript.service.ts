@@ -1,6 +1,6 @@
 
-async function getTranscript(videoId: string | undefined) {
-    // Implementation for fetching transcript
-}
+// async function getTranscript(videoId: string | undefined) {
+//     // Implementation for fetching transcript
+// }
 
-export default getTranscript;
+// export default getTranscript;

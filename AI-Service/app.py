@@ -3,7 +3,7 @@ from api.clip import router as clip_router
 
 
 from schemas.transcript_schema import TranscriptRequest
-from services.transcript_service import generate_transcript
+from services.whisper_service import generate_transcript
 
 app = FastAPI(
     title="Shortify AI Service",

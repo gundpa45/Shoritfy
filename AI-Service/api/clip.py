@@ -1,11 +1,17 @@
 from fastapi import APIRouter
 
 from schemas.clip_schema import ClipRequest
-from services.llm_service import analyze_transcript
+from services.clip_generator_service import generate_clips
 
 router = APIRouter()
 
 
 @router.post("/clips")
-def detect_clips(request: ClipRequest):
-    return analyze_transcript(request.segments)
+def create_clips(request: ClipRequest):
+
+    result = generate_clips(request.video_path)
+
+    return {
+        "success": True,
+        "data": result
+    }

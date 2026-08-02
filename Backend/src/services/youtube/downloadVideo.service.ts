@@ -3,25 +3,42 @@ import path from "path";
 import fs from "fs";
 
 async function downloadVideo(url: string, videoId: string | undefined) {
-    // Create the output directory
-    const outputDir = path.join(process.cwd(), "src", "temp", "video");
+
+    const outputDir = path.join(
+        process.cwd(),
+        "..",
+        "temp",
+        "video"
+    );
 
     if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
     }
 
-    // Output file path
-    const outputPath = path.join(outputDir, `${videoId}.%(ext)s`);
+    // Download template
+    const outputTemplate = path.join(outputDir, `${videoId}.%(ext)s`);
 
-    // Download the video
+    // Download video
     await youtubedl(url, {
         format: "bestvideo+bestaudio/best",
-        output: outputPath,
+        output: outputTemplate,
         noPlaylist: true,
     });
 
-    // Return the expected video path
-    return path.join(outputDir, `${videoId}.mp4`);
+    // Find the actual downloaded file
+    const downloadedFile = fs
+        .readdirSync(outputDir)
+        .find(file => file.startsWith(videoId!));
+
+    if (!downloadedFile) {
+        throw new Error("Downloaded video not found.");
+    }
+
+    const videoPath = path.join(outputDir, downloadedFile);
+
+    console.log("✅ Downloaded Video:", videoPath);
+
+    return videoPath;
 }
 
 export default downloadVideo;
