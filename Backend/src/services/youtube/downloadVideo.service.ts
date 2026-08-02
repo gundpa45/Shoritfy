@@ -18,12 +18,17 @@ async function downloadVideo(url: string, videoId: string | undefined) {
     // Download template
     const outputTemplate = path.join(outputDir, `${videoId}.%(ext)s`);
 
-    // Download video
-    await youtubedl(url, {
-        format: "bestvideo+bestaudio/best",
-        output: outputTemplate,
-        noPlaylist: true,
-    });
+        console.log("⬇️ Downloading optimized MP4 video...");
+
+        await youtubedl(url, {
+            format:
+                "bestvideo[ext=mp4][height<=1080]+bestaudio[ext=m4a]/best[ext=mp4][height<=1080]/best",
+            mergeOutputFormat: "mp4",
+            output: outputTemplate,
+            noPlaylist: true,
+        });
+
+        console.log("✅ Download completed.");
 
     // Find the actual downloaded file
     const downloadedFile = fs

@@ -65,14 +65,21 @@ def cut_clip(
         "0:a:0",
 
         # Video encoding
+        # GPU Encoding (NVIDIA NVENC)
         "-c:v",
-        "libx264",
+        "h264_nvenc",
 
         "-preset",
-        "fast",
+        "p5",
 
-        "-crf",
+        "-rc",
+        "vbr",
+
+        "-cq",
         "23",
+
+        "-b:v",
+        "0",
 
         # Audio encoding
         "-c:a",

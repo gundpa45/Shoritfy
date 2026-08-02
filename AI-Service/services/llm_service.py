@@ -6,31 +6,37 @@ from prompts.clip_prompt import SYSTEM_PROMPT
 
 
 def analyze_transcript(segments):
-
-    transcript = ""
+    # -----------------------------
+    # Build transcript efficiently
+    # -----------------------------
+    transcript_lines = []
 
     for segment in segments:
-        transcript += (
-        f"Start: {segment['start']}\n"
-        f"End: {segment['end']}\n"
-        f"Text: {segment['text']}\n\n"
-    )
+        transcript_lines.append(
+            f"[{segment['start']}-{segment['end']}] {segment['text']}"
+        )
 
-    # 👇 Debug information
-    print("=" * 50)
+    transcript = "\n".join(transcript_lines)
+
+    print("=" * 60)
     print(f"Segments: {len(segments)}")
-    print(f"Transcript length: {len(transcript)} characters")
-    print("=" * 50)
+    print(f"Transcript Length: {len(transcript)} characters")
+    print("=" * 60)
 
-    start_time = time.time()
+    start_time = time.perf_counter()
 
     response = client.chat(
-        model="qwen3",
-        # alive="30min",
+        model="qwen2.5:7b",
+
         format="json",
+
         options={
-        "temperature": 0
-                  },
+        "temperature":0,
+        "num_predict":256,
+        "num_ctx":2048,
+        "stop":["<|im_end|>"]
+         },
+
         messages=[
             {
                 "role": "system",
@@ -43,8 +49,25 @@ def analyze_transcript(segments):
         ]
     )
 
-    end_time = time.time()
+    end_time = time.perf_counter()
 
-    print(f"Ollama response time: {end_time - start_time:.2f} seconds")
+    print(f"LLM Time: {end_time-start_time:.2f} sec")
 
-    return json.loads(response["message"]["content"])
+    print("=" * 60)
+    print("JSON Returned By Ollama")
+    print("=" * 60)
+    print(response["message"]["content"])
+    print("=" * 60)
+
+    content = response["message"]["content"]
+
+    print(content)
+
+    try:
+        return json.loads(content)
+
+    except json.JSONDecodeError:
+        raise Exception(
+            "Ollama returned incomplete JSON.\n\n"
+            + content
+    )
