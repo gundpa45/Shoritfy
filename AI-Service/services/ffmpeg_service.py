@@ -1,11 +1,13 @@
 import os
 import subprocess
+from utils.logger import section, info, success
 
 
 # Project root (Shortify/)
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..")
-)
+)   
+
 
 
 # Shared clips directory
@@ -95,13 +97,14 @@ def cut_clip(
         output_file
     ]
 
-    print("=" * 70)
-    print("Running FFmpeg...")
-    print(" ".join(command))
-    print("=" * 70)
+    section("🎬 FFmpeg")
+
+    info("Running FFmpeg")
+
+    info(" ".join(command))
 
     subprocess.run(command, check=True)
 
-    print(f"✅ Clip generated: {output_file}")
+    success(f"Clip generated: {output_file}")
 
     return output_file
