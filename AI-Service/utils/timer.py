@@ -1,48 +1,32 @@
 import time
-
-from utils.logger import section, info
+from contextlib import contextmanager
 
 
 class PipelineTimer:
 
     def __init__(self):
-        self._starts = {}
-        self._results = {}
+        self.timers = {}
 
-    def start(self, stage: str):
-        """
-        Start timing a stage.
-        """
-        self._starts[stage] = time.perf_counter()
+    def start(self, name: str):
+        self.timers[name] = time.perf_counter()
 
-    def stop(self, stage: str):
-        """
-        Stop timing a stage.
-        """
-        if stage not in self._starts:
+    def stop(self, name: str):
+
+        if name not in self.timers:
             return
 
-        elapsed = time.perf_counter() - self._starts[stage]
+        elapsed = time.perf_counter() - self.timers[name]
 
-        self._results[stage] = elapsed
+        print(f"⏱ {name:<20}: {elapsed:.2f} sec")
 
-        return elapsed
+        del self.timers[name]
 
-    def report(self):
-        """
-        Print pipeline performance report.
-        """
+    @contextmanager
+    def track(self, name: str):
+        self.start(name)
 
-        section("📊 PIPELINE PERFORMANCE REPORT")
+        try:
+            yield
 
-        total = 0
-
-        for stage, value in self._results.items():
-
-            info(f"{stage:<20} : {value:.2f} sec")
-
-            total += value
-
-        print("-" * 70)
-
-        info(f"{'TOTAL':<20} : {total:.2f} sec")
+        finally:
+            self.stop(name)
