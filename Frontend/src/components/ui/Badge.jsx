@@ -1,24 +1,34 @@
 import { cn } from "../../lib/utils";
 
-export function Badge({ children, variant = "default", className }) {
+export function Badge({ children, variant = "default", dot = false, className }) {
   const variants = {
-    default: "bg-[#F5F5F4] text-[#6B6B6B] border-[#E5E5E3]",
-    purple: "bg-[#7C3AED]/10 text-[#7C3AED] border-[#7C3AED]/20",
-    cyan: "bg-blue-500/10 text-blue-600 border-blue-200",
-    green: "bg-green-500/10 text-green-700 border-green-200",
-    amber: "bg-amber-500/10 text-amber-700 border-amber-200",
-    red: "bg-red-500/10 text-red-700 border-red-200",
-    gradient: "bg-[#7C3AED] text-white border-0",
+    default: "bg-[#141418] text-[#8A8A93] border-white/[0.1]",
+    lime: "bg-[#D4FF3F]/10 text-[#D4FF3F] border-[#D4FF3F]/30",
+    purple: "bg-[#8B5CF6]/10 text-[#8B5CF6] border-[#8B5CF6]/30",
+    cyan: "bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/30",
+    green: "bg-emerald-500/10 text-emerald-400 border-emerald-500/30",
+    amber: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+    red: "bg-red-500/10 text-red-400 border-red-500/30",
   };
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold border",
-        variants[variant],
+        "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold border tracking-wider uppercase",
+        variants[variant] || variants.default,
         className
       )}
     >
+      {dot && (
+        <span className={cn(
+          "w-1.5 h-1.5 rounded-full animate-pulse",
+          variant === "lime" ? "bg-[#D4FF3F]" :
+          variant === "purple" ? "bg-[#8B5CF6]" :
+          variant === "cyan" ? "bg-[#00E5FF]" :
+          variant === "green" ? "bg-emerald-400" :
+          "bg-[#8A8A93]"
+        )} />
+      )}
       {children}
     </span>
   );
@@ -26,12 +36,13 @@ export function Badge({ children, variant = "default", className }) {
 
 export function ScoreBadge({ score }) {
   let variant = "red";
-  if (score >= 80) variant = "green";
+  if (score >= 90) variant = "lime";
+  else if (score >= 75) variant = "green";
   else if (score >= 60) variant = "amber";
 
   return (
-    <Badge variant={variant}>
-      {score}/100
+    <Badge variant={variant} dot>
+      {score}/100 VIRAL SCORE
     </Badge>
   );
 }
