@@ -1,126 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --color-bg-void: #070709;
-    --color-bg-surface: #0E0E12;
-    --color-bg-card: #14141A;
-    --color-bg-elevated: #1B1B24;
-    
-    --color-accent-lime: #D4FF3F;
-    --color-accent-hover: #C5F02B;
-    
-    --color-text-primary: #FFFFFF;
-    --color-text-muted: #94949E;
-    
-    --color-border-hairline: rgba(255, 255, 255, 0.08);
-    --color-border-hover: rgba(255, 255, 255, 0.16);
+    --font-sans: 'Inter Tight', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Fira Code', monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #000000;
+    color: #F4F4F5;
+    overflow-x: hidden;
   }
 }
 
-@layer utilities {
-  /* Nordcraft Glass Panel */
-  .glass-panel {
-    background-color: rgba(14, 14, 18, 0.75);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  /* Premium Glowing SaaS Card */
-  .saas-card {
-    background-color: #0E0E12;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.25rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .saas-card:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Electric Lime CTA Button */
-  .btn-accent {
-    background: linear-gradient(180deg, #E2FF70 0%, #D4FF3F 100%);
-    color: #070709;
-    font-weight: 700;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 24px rgba(212, 255, 63, 0.25);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn-accent:hover {
-    background: linear-gradient(180deg, #EEFF99 0%, #E2FF70 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 32px rgba(212, 255, 63, 0.4);
-  }
-  .btn-accent:active {
-    transform: translateY(0);
-  }
-
-  /* Radial Ambient Background Glow */
-  .hero-radial-glow {
-    background: radial-gradient(
-      ellipse 900px 600px at 50% 10%,
-      rgba(212, 255, 63, 0.06) 0%,
-      rgba(139, 92, 246, 0.03) 55%,
-      transparent 85%
-    );
-  }
-
-  /* Subtle Grid Mesh Background */
-  .grid-mesh-bg {
-    background-size: 32px 32px;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  }
+/* Nordcraft Pitch Black Base */
+.nord-bg {
+  background-color: #000000;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Nordcraft Clean Card */
+.nord-card {
+  background: #09090B;
+  border: 1px solid #27272A;
+  border-radius: 20px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #070709;
-  color: #FFFFFF;
-  width: 100%;
+.nord-card:hover {
+  border-color: #3F3F46;
 }
 
-body, #root {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #070709;
-  color: #FFFFFF;
-  line-height: 1.5;
-  min-height: 100vh;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+/* Nordcraft Cyan Accent Button */
+.btn-nord-cyan {
+  background-color: #8BEAD8;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.2s ease;
 }
 
-/* Monospace font ONLY for technical code/numbers */
-.font-mono {
-  font-family: 'JetBrains Mono', monospace;
+.btn-nord-cyan:hover {
+  background-color: #A3F3E4;
+  transform: translateY(-1px);
 }
 
-/* Custom Minimalist Dark Scrollbar */
+/* Nordcraft Dark Button */
+.btn-nord-dark {
+  background-color: #18181B;
+  border: 1px solid #27272A;
+  color: #F4F4F5;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.btn-nord-dark:hover {
+  background-color: #27272A;
+  border-color: #3F3F46;
+}
+
+/* Side Gallery Fading Overlay */
+.hero-side-fade-left {
+  background: linear-gradient(to right, #000000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+}
+
+.hero-side-fade-right {
+  background: linear-gradient(to left, #000000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
-  background: #070709;
+  background: #000000;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: #22222A;
-  border-radius: 3px;
+  background: #27272A;
+  border-radius: 9999px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #383845;
+  background: #3F3F46;
 }
