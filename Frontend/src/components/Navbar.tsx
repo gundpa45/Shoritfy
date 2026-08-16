@@ -33,7 +33,7 @@ export const Navbar = ({ viewMode, setViewMode, onOpenPricing }: NavbarProps) =>
 
             {/* Nordcraft Version Pill Badge */}
             <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#18181B] border border-[#27272A] text-[11px] font-mono text-zinc-400 font-medium">
-              v.3.4.0
+              v.0
             </span>
           </div>
 
