@@ -20,7 +20,8 @@ async function downloadAudio(url: string, videoId: string | undefined) {
         extractAudio: true,
         audioFormat: "mp3",
         output: outputPath,
-        noPlaylist: true,   
+        noPlaylist: true,
+        jsRuntimes: "node",
     });
 
     return path.join(outputDir, `${videoId}.mp3`);

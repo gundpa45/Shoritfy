@@ -26,6 +26,7 @@ async function downloadVideo(url: string, videoId: string | undefined) {
             mergeOutputFormat: "mp4",
             output: outputTemplate,
             noPlaylist: true,
+            jsRuntimes: "node",
         });
 
         console.log("✅ Download completed.");
