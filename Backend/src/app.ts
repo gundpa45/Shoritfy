@@ -1,4 +1,5 @@
 import express from "express"
+import path from "path";
 import authRoutes from "./routes/auth.routes.js";
 import urlRoutes from "./routes/url.route.js";
 
@@ -19,6 +20,11 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+// Serve generated clips and source videos as static files
+const tempRoot = path.join(process.cwd(), "..", "temp");
+app.use("/media/clips", express.static(path.join(tempRoot, "clips")));
+app.use("/media/video", express.static(path.join(tempRoot, "video")));
 
 app.use("/api/v1", authRoutes);
 app.use("/api/v1", urlRoutes);
