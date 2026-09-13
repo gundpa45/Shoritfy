@@ -70,7 +70,7 @@ export const Navbar = ({ viewMode, setViewMode, onOpenPricing }: NavbarProps) =>
             </a>
           </nav>
 
-          {/* Right: SaaS Studio Toggle, Sign Up Button & Mobile Menu (Nordcraft exact) */}
+          {/* Right: Creator Studio Toggle, Sign Up Button & Mobile Menu (Nordcraft exact) */}
           <div className="flex items-center gap-3">
             
             {/* View Switcher Pill */}
@@ -93,7 +93,7 @@ export const Navbar = ({ viewMode, setViewMode, onOpenPricing }: NavbarProps) =>
                     : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                <LayoutDashboard className="w-3.5 h-3.5 text-[#8BEAD8]" /> SaaS Studio
+                <LayoutDashboard className="w-3.5 h-3.5 text-[#8BEAD8]" /> Creator Studio
               </button>
             </div>
 
@@ -131,7 +131,7 @@ export const Navbar = ({ viewMode, setViewMode, onOpenPricing }: NavbarProps) =>
             onClick={() => { setViewMode('dashboard'); setMobileMenuOpen(false); }}
             className="block w-full text-left text-sm font-medium text-[#8BEAD8] py-2"
           >
-            Open SaaS Studio Workspace
+            Open Creator Studio
           </button>
           <button
             onClick={() => { onOpenPricing(); setMobileMenuOpen(false); }}
