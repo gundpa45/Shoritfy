@@ -8,7 +8,7 @@ import {
 
 const BACKEND_URL = 'http://localhost:3200';
 
-interface ApiData {
+export interface ApiData {
   success: boolean;
   data: {
     videoId: string;
@@ -252,6 +252,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
   const [showTranscript, setShowTranscript] = useState(false);
   const [showSourceVideo, setShowSourceVideo] = useState(false);
   const [downloadingIdx, setDownloadingIdx] = useState<number | null>(null);
+  const [downloadError, setDownloadError] = useState('');
 
   const selectedClip = data.clips[selectedClipIdx];
   const clipVideoUrl = selectedClip ? `${BACKEND_URL}${selectedClip.clip_url}` : '';
@@ -259,9 +260,11 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
 
   const handleDownload = async (clip: ApiData['data']['clips'][0], idx: number) => {
     setDownloadingIdx(idx);
+    setDownloadError('');
     try {
       const url = `${BACKEND_URL}${clip.clip_url}`;
       const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`Download failed (${resp.status})`);
       const blob = await resp.blob();
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -271,9 +274,9 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
       document.body.removeChild(a);
       URL.revokeObjectURL(a.href);
     } catch (err) {
-      console.error('Download failed:', err);
+      setDownloadError(err instanceof Error ? err.message : 'Could not download this clip. Please try again.');
     }
-    setTimeout(() => setDownloadingIdx(null), 1500);
+    setDownloadingIdx(null);
   };
 
   const avgScore = data.clips.length
@@ -285,6 +288,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
       {/* Background ambience */}
       <div className="fixed top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-[#8BEAD8]/[0.03] to-transparent pointer-events-none z-0" />
 
+      {downloadError && <div role="alert" className="relative z-10 mb-4 rounded-xl border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-200">{downloadError}</div>}
       {/* ─── Top Bar ─── */}
       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <button
@@ -297,7 +301,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
         <div className="flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0A0A0C] border border-[#1A1A1E] text-xs font-mono">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-emerald-400 font-bold">Pipeline Complete</span>
+            <span className="text-emerald-400 font-bold">Clips ready</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0A0A0C] border border-[#1A1A1E] text-xs font-mono text-zinc-400">
             <Globe className="w-3.5 h-3.5 text-[#8BEAD8]" />
@@ -380,7 +384,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-bold font-display text-white uppercase tracking-wider flex items-center gap-2">
                 <Zap className="w-4 h-4 text-[#8BEAD8]" />
-                AI Clips
+                Your clips
               </h3>
               <span className="text-[11px] font-mono text-zinc-500 bg-[#111114] px-2.5 py-1 rounded-lg border border-[#1A1A1E]">
                 {data.clips.length} total
@@ -397,7 +401,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
               ))}
               {data.clips.length === 0 && (
                 <div className="text-center py-12 text-zinc-500 text-sm">
-                  No clips were generated. The AI could not find strong viral moments.
+                  No clips were generated for this video. Try another YouTube link.
                 </div>
               )}
             </div>
@@ -456,11 +460,11 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
                 >
                   {downloadingIdx === selectedClipIdx ? (
                     <>
-                      <CheckCircle2 className="w-5 h-5" /> Downloaded!
+                      <CheckCircle2 className="w-5 h-5" /> Preparing download…
                     </>
                   ) : (
                     <>
-                      <Download className="w-5 h-5" /> Download Clip {selectedClip.index}
+                      <Download className="w-5 h-5" /> Download clip {selectedClip.index}
                     </>
                   )}
                 </button>
@@ -531,7 +535,7 @@ export const StudioResults = ({ apiData, onBack }: StudioResultsProps) => {
             </>
           ) : (
             <div className="flex items-center justify-center h-64 rounded-2xl bg-[#08080A] border border-[#1A1A1E] text-zinc-500 text-sm font-mono">
-              No clips to display
+              Nothing here yet. Try another YouTube video.
             </div>
           )}
 
