@@ -13,7 +13,7 @@ export const Hero = ({ onProcessUrl }: HeroProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!url.trim()) {
-      onProcessUrl('https://youtube.com/watch?v=sample-mrbeast-viral');
+      return;
     } else {
       onProcessUrl(url);
     }
@@ -100,10 +100,10 @@ export const Hero = ({ onProcessUrl }: HeroProps) => {
             {/* Start Clipping CTA Button */}
             <button
               type="button"
-              onClick={() => onProcessUrl(url || 'https://youtube.com/watch?v=sample-mrbeast-viral')}
+              onClick={() => { if (url.trim()) onProcessUrl(url.trim()); }}
               className="btn-nord-cyan px-6 py-3.5 rounded-2xl text-sm font-bold shrink-0 w-full sm:w-auto font-display cursor-pointer"
             >
-              Start clipping
+              Find the good parts
             </button>
 
             <span className="text-zinc-500 font-mono text-xs hidden sm:inline">or</span>
@@ -111,7 +111,9 @@ export const Hero = ({ onProcessUrl }: HeroProps) => {
             {/* Input Box with Upward Arrow Send Button */}
             <div className="relative flex-1 w-full">
               <input
-                type="text"
+                type="url"
+                aria-label="YouTube video URL"
+                required
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Start with a YouTube URL..."
@@ -119,6 +121,7 @@ export const Hero = ({ onProcessUrl }: HeroProps) => {
               />
               <button
                 type="submit"
+                aria-label="Find clips from YouTube URL"
                 className="absolute right-2 top-2 bottom-2 w-9 h-9 rounded-xl bg-[#27272A] hover:bg-[#3F3F46] text-white flex items-center justify-center transition-colors cursor-pointer"
               >
                 <ArrowUp className="w-4 h-4" />
