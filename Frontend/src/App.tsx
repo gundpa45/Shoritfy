@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { DashboardView } from './components/DashboardView';
+import { AuthPage } from './pages/AuthPage';
 import { CreatorStudio } from './pages/CreatorStudio';
 import { LandingPage } from './pages/LandingPage';
 import { UrlPage } from './pages/UrlPage';
@@ -24,11 +25,13 @@ export function App() {
     setIsCheckoutOpen(true);
   };
 
+  if (location.pathname === '/signup') return <AuthPage key="signup" mode="signup" />;
+  if (location.pathname === '/signin') return <AuthPage key="signin" mode="signin" />;
   if (location.pathname === '/studio') return <CreatorStudio />;
   if (location.pathname === '/studio/demo') return <DashboardView onBackToLanding={() => navigate('/studio')} />;
 
   return (
-    <div className="min-h-screen bg-[#000000] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-app-bg text-app-text flex flex-col font-sans">
       
       {/* Navigation Bar */}
       <Navbar

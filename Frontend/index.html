@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shoritfy Creator Studio — Find the good parts in every video</title>
     <meta name="description" content="Turn a long YouTube video into short clips you can preview and download." />
+    <script>
+      // Apply the preference before rendering to avoid a flash of the wrong theme.
+      (() => {
+        let preference = 'system';
+        try { preference = localStorage.getItem('shoritfy.theme') || 'system'; } catch {}
+        const theme = preference === 'light' || preference === 'dark' ? preference : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter+Tight:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-[#07090E] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+  <body class="antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,0 +1,54 @@
+:root, [data-theme="dark"], .theme-media {
+  color-scheme: dark;
+  --ui-bg: #070b0a;
+  --ui-surface: #0f1613;
+  --ui-raised: #18231d;
+  --ui-inset: #090e0b;
+  --ui-border: #2c3b32;
+  --ui-border-strong: #43594b;
+  --ui-text: #f0f6f2;
+  --ui-muted: #b4c3ba;
+  --ui-subtle: #8fa497;
+  --ui-accent: #8bead8;
+  --ui-accent-soft: #19372e;
+  --ui-primary: #8bead8;
+  --ui-primary-hover: #a8f5e7;
+  --ui-on-primary: #08221b;
+  --ui-danger: #ffaaa1;
+  --ui-shadow: 0 20px 60px #0003;
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --ui-bg: #f4f7f4;
+  --ui-surface: #ffffff;
+  --ui-raised: #e8efe9;
+  --ui-inset: #f1f5f1;
+  --ui-border: #d1ddd3;
+  --ui-border-strong: #9aafa0;
+  --ui-text: #172a20;
+  --ui-muted: #425e4f;
+  --ui-subtle: #597163;
+  --ui-accent: #08745a;
+  --ui-accent-soft: #ddf3e9;
+  --ui-primary: #08745a;
+  --ui-primary-hover: #075f4b;
+  --ui-on-primary: #ffffff;
+  --ui-danger: #b33227;
+  --ui-shadow: 0 20px 60px #224b2d0d;
+}
+html { background: var(--ui-bg); color: var(--ui-text); }
+body { background: var(--ui-bg); color: var(--ui-text); }
+:where(a, button, input, select, textarea, summary):focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 4px; }
+::selection { background: var(--ui-accent-soft); color: var(--ui-text); }
+.theme-switcher { display: inline-flex; align-items: center; gap: 3px; padding: 4px; margin: 0; border: 1px solid var(--ui-border); background: var(--ui-inset); border-radius: 11px; flex: none; }
+.theme-switcher label { position: relative; cursor: pointer; }
+.theme-switcher input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.theme-switcher label > span { display: grid; place-items: center; width: 30px; height: 30px; color: var(--ui-subtle); border-radius: 7px; transition: background .15s, color .15s; }
+.theme-switcher input:checked + span { background: var(--ui-accent-soft); color: var(--ui-accent); }
+.theme-switcher label:hover > span { color: var(--ui-text); }
+.theme-switcher input:focus-visible + span { outline: 2px solid var(--ui-accent); outline-offset: 2px; }
+.theme-top-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
+.theme-auth-link { font: 600 12px 'Inter', sans-serif; color: var(--ui-accent); letter-spacing: normal; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

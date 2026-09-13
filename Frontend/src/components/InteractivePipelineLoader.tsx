@@ -100,53 +100,53 @@ export const InteractivePipelineLoader = ({ url, onComplete }: PipelineLoaderPro
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#8BEAD8]/10 rounded-full blur-[150px] pointer-events-none z-0" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-white/5 rounded-full blur-[80px] pointer-events-none z-0" />
 
-      <div className="w-full rounded-[2.5rem] p-2 relative overflow-hidden bg-gradient-to-b from-[#18181B] to-[#000000] shadow-[0_30px_60px_rgba(0,0,0,0.8)] z-10 border border-[#27272A] max-w-5xl mx-auto">
+      <div className="w-full rounded-[2.5rem] p-2 relative overflow-hidden bg-gradient-to-b from-app-raised to-app-bg shadow-[0_30px_60px_rgba(0,0,0,0.8)] z-10 border border-app-border max-w-5xl mx-auto">
         
         {/* Animated grid overlay */}
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20 mix-blend-overlay"></div>
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#8BEAD8]/50 to-transparent"></div>
 
-        <div className="rounded-[2.25rem] bg-[#000000] p-8 sm:p-12 relative overflow-hidden h-full">
+        <div className="rounded-[2.25rem] bg-app-bg p-8 sm:p-12 relative overflow-hidden h-full">
           
           {/* Header Area */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 mb-10 border-b border-[#18181B]">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 mb-10 border-b border-app-border">
             <div>
-              <div className="flex items-center gap-3 text-xs font-mono font-bold text-[#8BEAD8] uppercase tracking-widest mb-4">
+              <div className="flex items-center gap-3 text-xs font-mono font-bold text-app-accent uppercase tracking-widest mb-4">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8BEAD8] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-[#8BEAD8]"></span>
                 </span>
                 Live Pipeline Execution
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black font-display text-white tracking-tight mb-2">
+              <h2 className="text-3xl sm:text-5xl font-black font-display text-app-text tracking-tight mb-2">
                 Extracting Viral Clips
               </h2>
-              <p className="text-zinc-500 text-sm font-mono truncate max-w-xl">
-                Source: <span className="text-zinc-300 ml-1">{url || 'https://youtube.com/watch?v=sample-mrbeast'}</span>
+              <p className="text-app-subtle text-sm font-mono truncate max-w-xl">
+                Source: <span className="text-app-muted ml-1">{url || 'https://youtube.com/watch?v=sample-mrbeast'}</span>
               </p>
             </div>
 
-            <div className="flex items-center gap-6 bg-[#09090B] px-6 py-4 rounded-3xl border border-[#18181B] shadow-inner">
+            <div className="flex items-center gap-6 bg-app-surface px-6 py-4 rounded-3xl border border-app-border shadow-inner">
               <div className="text-right">
-                <span className="block text-[10px] uppercase tracking-widest font-mono text-zinc-500 font-bold mb-1">Peak Virality</span>
-                <span className="text-3xl font-black font-display tracking-tight text-[#8BEAD8] drop-shadow-[0_0_10px_rgba(139,234,216,0.3)]">{viralityGauge}</span>
+                <span className="block text-[10px] uppercase tracking-widest font-mono text-app-subtle font-bold mb-1">Peak Virality</span>
+                <span className="text-3xl font-black font-display tracking-tight text-app-accent drop-shadow-[0_0_10px_rgba(139,234,216,0.3)]">{viralityGauge}</span>
               </div>
-              <div className="w-14 h-14 rounded-2xl bg-[#000000] border border-[#27272A] flex items-center justify-center shadow-lg relative overflow-hidden">
+              <div className="w-14 h-14 rounded-2xl bg-app-bg border border-app-border flex items-center justify-center shadow-lg relative overflow-hidden">
                 <div className="absolute inset-0 bg-[#8BEAD8]/10 animate-pulse"></div>
-                <Sparkles className="w-6 h-6 text-[#8BEAD8] animate-spin z-10" style={{ animationDuration: '4s' }} />
+                <Sparkles className="w-6 h-6 text-app-accent animate-spin z-10" style={{ animationDuration: '4s' }} />
               </div>
             </div>
           </div>
 
           {/* Master Progress Bar */}
           <div className="mb-14">
-            <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 mb-4">
+            <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-widest text-app-subtle mb-4">
               <span className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-[#8BEAD8]" /> Master Process
+                <Activity className="w-4 h-4 text-app-accent" /> Master Process
               </span>
-              <span className="text-[#8BEAD8] text-sm">{overallProgress}%</span>
+              <span className="text-app-accent text-sm">{overallProgress}%</span>
             </div>
-            <div className="h-4 w-full bg-[#050505] rounded-full overflow-hidden p-1 border border-[#18181B] shadow-inner">
+            <div className="h-4 w-full bg-app-bg rounded-full overflow-hidden p-1 border border-app-border shadow-inner">
               <div
                 className="h-full bg-gradient-to-r from-white via-[#8BEAD8] to-white rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(139,234,216,0.5)] relative overflow-hidden"
                 style={{ width: `${overallProgress}%` }}
@@ -172,10 +172,10 @@ export const InteractivePipelineLoader = ({ url, onComplete }: PipelineLoaderPro
                     key={stage.title}
                     className={`p-5 rounded-2xl border transition-all duration-500 flex items-center gap-5 relative overflow-hidden ${
                       isDone
-                        ? 'bg-[#09090B]/60 border-[#18181B]'
+                        ? 'bg-app-surface/60 border-app-border'
                         : isCurrent
-                        ? 'bg-[#09090B] border-[#8BEAD8]/40 shadow-[0_0_25px_rgba(139,234,216,0.1)]'
-                        : 'bg-[#050505] border-[#18181B] opacity-50'
+                        ? 'bg-app-surface border-app-accent/40 shadow-[0_0_25px_rgba(139,234,216,0.1)]'
+                        : 'bg-app-bg border-app-border opacity-50'
                     }`}
                   >
                     {isCurrent && (
@@ -184,26 +184,26 @@ export const InteractivePipelineLoader = ({ url, onComplete }: PipelineLoaderPro
                     
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border ${
                       isDone 
-                        ? 'bg-[#8BEAD8]/10 border-[#8BEAD8]/20 text-[#8BEAD8]' 
+                        ? 'bg-[#8BEAD8]/10 border-app-accent/20 text-app-accent' 
                         : isCurrent 
-                        ? 'bg-[#000000] border-[#8BEAD8]/50 text-[#8BEAD8] shadow-inner' 
-                        : 'bg-[#000000] border-[#18181B] text-zinc-600'
+                        ? 'bg-app-bg border-app-accent/50 text-app-accent shadow-inner' 
+                        : 'bg-app-bg border-app-border text-app-subtle'
                     }`}>
                       {isDone ? <CheckCircle2 className="w-5 h-5" /> : <StageIcon className={`w-5 h-5 ${isCurrent ? 'animate-pulse' : ''}`} />}
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-1">
-                        <h4 className={`font-bold text-sm lg:text-base font-display tracking-wide ${isCurrent ? 'text-white drop-shadow-md' : 'text-zinc-400'}`}>
+                        <h4 className={`font-bold text-sm lg:text-base font-display tracking-wide ${isCurrent ? 'text-app-text drop-shadow-md' : 'text-app-muted'}`}>
                           {stage.title}
                         </h4>
                         {isCurrent && (
-                          <span className="text-[9px] uppercase tracking-widest font-mono font-bold px-2.5 py-1 rounded-md bg-[#8BEAD8]/10 border border-[#8BEAD8]/30 text-[#8BEAD8]">
+                          <span className="text-[9px] uppercase tracking-widest font-mono font-bold px-2.5 py-1 rounded-md bg-[#8BEAD8]/10 border border-app-accent/30 text-app-accent">
                             Processing
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-zinc-500 font-mono truncate">
+                      <p className="text-xs text-app-subtle font-mono truncate">
                         {stage.sub}
                       </p>
                     </div>
@@ -216,29 +216,29 @@ export const InteractivePipelineLoader = ({ url, onComplete }: PipelineLoaderPro
             <div className="lg:col-span-5 flex flex-col gap-6">
               
               {/* Fake AI Visualizer */}
-              <div className="p-1 rounded-[2rem] bg-gradient-to-br from-[#18181B] to-[#0A0A0C] border border-[#27272A] relative overflow-hidden group">
-                <div className="bg-[#050505] rounded-[1.8rem] p-6 h-56 flex flex-col justify-between relative overflow-hidden">
+              <div className="p-1 rounded-[2rem] bg-gradient-to-br from-app-raised to-app-surface border border-app-border relative overflow-hidden group">
+                <div className="bg-app-bg rounded-[1.8rem] p-6 h-56 flex flex-col justify-between relative overflow-hidden">
                   
-                  <div className="flex items-center justify-between text-xs font-mono text-zinc-500 border-b border-[#18181B] pb-4 relative z-10">
-                    <span className="flex items-center gap-2 text-[#8BEAD8] uppercase font-bold tracking-widest">
+                  <div className="flex items-center justify-between text-xs font-mono text-app-subtle border-b border-app-border pb-4 relative z-10">
+                    <span className="flex items-center gap-2 text-app-accent uppercase font-bold tracking-widest">
                       <Video className="w-4 h-4" /> AI Face Tracker
                     </span>
-                    <span className="text-white bg-[#18181B] px-2 py-1 rounded border border-[#27272A]">60 FPS</span>
+                    <span className="text-app-text bg-app-raised px-2 py-1 rounded border border-app-border">60 FPS</span>
                   </div>
 
-                  <div className="relative w-full h-28 my-auto rounded-2xl bg-[#09090B] border border-[#18181B] flex items-center justify-center overflow-hidden z-10 mt-4 shadow-inner">
+                  <div className="relative w-full h-28 my-auto rounded-2xl bg-app-surface border border-app-border flex items-center justify-center overflow-hidden z-10 mt-4 shadow-inner">
                     {/* Fake radar/scanline */}
                     <div className="absolute top-0 bottom-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-[#8BEAD8]/10 to-transparent animate-[scan_3s_linear_infinite]"></div>
                     
                     {/* Fake face bounding box */}
-                    <div className="w-20 h-20 border border-[#8BEAD8] relative flex items-center justify-center bg-transparent group-hover:scale-105 transition-transform duration-700">
-                      <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-[#8BEAD8]"></div>
-                      <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-[#8BEAD8]"></div>
-                      <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-[#8BEAD8]"></div>
-                      <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-[#8BEAD8]"></div>
+                    <div className="w-20 h-20 border border-app-accent relative flex items-center justify-center bg-transparent group-hover:scale-105 transition-transform duration-700">
+                      <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-app-accent"></div>
+                      <div className="absolute -top-1 -right-1 w-2 h-2 border-t-2 border-r-2 border-app-accent"></div>
+                      <div className="absolute -bottom-1 -left-1 w-2 h-2 border-b-2 border-l-2 border-app-accent"></div>
+                      <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-app-accent"></div>
                       
-                      <div className="w-16 h-16 rounded-full border border-dashed border-[#8BEAD8]/40 shadow-inner flex items-center justify-center bg-[#050505]">
-                        <span className="text-[9px] uppercase tracking-widest font-mono text-[#8BEAD8] font-bold">Target</span>
+                      <div className="w-16 h-16 rounded-full border border-dashed border-app-accent/40 shadow-inner flex items-center justify-center bg-app-bg">
+                        <span className="text-[9px] uppercase tracking-widest font-mono text-app-accent font-bold">Target</span>
                       </div>
                     </div>
                   </div>
@@ -246,17 +246,17 @@ export const InteractivePipelineLoader = ({ url, onComplete }: PipelineLoaderPro
               </div>
 
               {/* Console Logs */}
-              <div className="p-6 rounded-[2rem] bg-[#000000] border border-[#18181B] shadow-inner font-mono text-[10px] sm:text-xs text-zinc-400 h-56 flex flex-col relative overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-[#000000] to-transparent z-10 pointer-events-none"></div>
+              <div className="p-6 rounded-[2rem] bg-app-bg border border-app-border shadow-inner font-mono text-[10px] sm:text-xs text-app-muted h-56 flex flex-col relative overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-app-bg to-transparent z-10 pointer-events-none"></div>
                 
-                <div className="text-zinc-600 pb-3 border-b border-[#18181B] font-bold uppercase tracking-widest flex items-center gap-2 mb-3 relative z-20">
-                  <Terminal className="w-4 h-4 text-white" /> Terminal Output
+                <div className="text-app-subtle pb-3 border-b border-app-border font-bold uppercase tracking-widest flex items-center gap-2 mb-3 relative z-20">
+                  <Terminal className="w-4 h-4 text-app-text" /> Terminal Output
                 </div>
                 
                 <div className="flex-1 overflow-hidden relative">
                   <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end space-y-2 pb-2">
                     {logs.map((log, i) => (
-                      <div key={i} className={`${i === logs.length - 1 ? 'text-white font-bold drop-shadow-md' : 'text-[#8BEAD8]/60'} animate-fade-in`}>
+                      <div key={i} className={`${i === logs.length - 1 ? 'text-app-text font-bold drop-shadow-md' : 'text-app-accent/60'} animate-fade-in`}>
                         {log}
                       </div>
                     ))}

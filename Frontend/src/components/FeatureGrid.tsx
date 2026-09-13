@@ -47,16 +47,16 @@ const FEATURES = [
 
 export const FeatureGrid = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#18181B]" id="features">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-app-border" id="features">
       
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181B] border border-[#27272A] text-[#8BEAD8] text-xs font-mono font-bold uppercase tracking-wider mb-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-app-raised border border-app-border text-app-accent text-xs font-mono font-bold uppercase tracking-wider mb-4">
           <Layers className="w-3.5 h-3.5" /> Full Feature Suite
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-app-text font-display tracking-tight">
           Engineered for Maximum Content Leverage
         </h2>
-        <p className="text-zinc-400 text-base sm:text-lg mt-3">
+        <p className="text-app-muted text-base sm:text-lg mt-3">
           Shortify replaces an entire editing agency with automated AI pipelines designed specifically for viral video growth.
         </p>
       </div>
@@ -67,33 +67,33 @@ export const FeatureGrid = () => {
           return (
             <div
               key={feature.title}
-              className="nord-card p-6 lg:p-8 flex flex-col justify-between border border-[#27272A] hover:border-zinc-700 transition-all group"
+              className="nord-card p-6 lg:p-8 flex flex-col justify-between border border-app-border hover:border-app-border transition-all group"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-[#18181B] border border-[#27272A] flex items-center justify-center text-[#8BEAD8]">
+                  <div className="w-10 h-10 rounded-xl bg-app-raised border border-app-border flex items-center justify-center text-app-accent">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <span className="px-2.5 py-1 rounded-md bg-[#18181B] border border-[#27272A] text-[10px] font-mono font-bold text-zinc-300">
+                  <span className="px-2.5 py-1 rounded-md bg-app-raised border border-app-border text-[10px] font-mono font-bold text-app-muted">
                     {feature.badge}
                   </span>
                 </div>
 
-                <span className="text-[10px] font-mono font-bold tracking-widest text-zinc-500 uppercase block mb-1">
+                <span className="text-[10px] font-mono font-bold tracking-widest text-app-subtle uppercase block mb-1">
                   {feature.tag}
                 </span>
 
-                <h3 className="text-xl font-bold font-display text-white mb-3">
+                <h3 className="text-xl font-bold font-display text-app-text mb-3">
                   {feature.title}
                 </h3>
 
-                <p className="text-zinc-400 text-sm leading-relaxed font-sans">
+                <p className="text-app-muted text-sm leading-relaxed font-sans">
                   {feature.description}
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-[#18181B] flex items-center gap-2 text-xs font-mono text-zinc-400">
-                <Check className="w-4 h-4 text-[#8BEAD8]" /> Automated Pipeline Step
+              <div className="pt-6 mt-6 border-t border-app-border flex items-center gap-2 text-xs font-mono text-app-muted">
+                <Check className="w-4 h-4 text-app-accent" /> Automated Pipeline Step
               </div>
             </div>
           );
