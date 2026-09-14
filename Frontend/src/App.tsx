@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -18,6 +18,13 @@ export function App() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    const page = location.pathname === '/signup' ? 'Sign up' : location.pathname === '/signin' ? 'Sign in' : 'Creator Studio';
+    document.title = `${page} · Shoritfy`;
+    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [location.pathname, location.hash]);
+
   const viewMode: ViewMode = location.pathname.startsWith('/studio') ? 'dashboard' : 'landing';
 
   const handleOpenPricing = (planName = 'Pro Viral', price = '$29/mo') => {

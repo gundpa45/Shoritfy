@@ -66,7 +66,7 @@ export function AuthPage({ mode }: { mode: 'signup' | 'signin' }) {
       <main className="auth-main">
         <section className="auth-story" aria-label="Welcome to Shoritfy">
           <p className="auth-eyebrow">YOUR IDEAS. MORE POSSIBILITIES.</p>
-          <h1>Big ideas.<br />Short clips.<br /><em>Your next chapter.</em></h1>
+          <h2>Big ideas.<br />Short clips.<br /><em>Your next chapter.</em></h2>
           <p className="auth-story-intro">A creative home for the moments that deserve to be seen.</p>
           <div className="auth-art" aria-hidden="true">
             <div className="auth-art-grid" />
@@ -78,7 +78,7 @@ export function AuthPage({ mode }: { mode: 'signup' | 'signin' }) {
         </section>
         <section className="auth-form-panel" aria-labelledby="auth-title">
           <Link to="/" className="auth-back"><ArrowLeft size={15} /> Back to landing</Link>
-          <div className="auth-form-heading"><span className="auth-form-icon"><Sparkles size={23} /></span><p className="auth-eyebrow">{signingUp ? 'START YOUR NEXT CHAPTER' : 'YOUR STUDIO IS WAITING'}</p><h2 id="auth-title">{signingUp ? 'A space for your creativity.' : 'Welcome back.'}</h2><p>{signingUp ? 'Create your Shoritfy account.' : 'Sign in to your Shoritfy account.'}</p></div>
+          <div className="auth-form-heading"><span className="auth-form-icon"><Sparkles size={23} /></span><p className="auth-eyebrow">{signingUp ? 'START YOUR NEXT CHAPTER' : 'YOUR STUDIO IS WAITING'}</p><h1 id="auth-title">{signingUp ? 'A space for your creativity.' : 'Welcome back.'}</h1><p>{signingUp ? 'Create your Shoritfy account.' : 'Sign in to your Shoritfy account.'}</p></div>
           <div className="auth-preview-note"><span>FRONTEND PREVIEW</span>Account access is not connected yet. You can try the form; your details won’t be sent or saved.</div>
           <form ref={form} onSubmit={submit} noValidate>
             {signingUp && field('name', 'Your name', 'text', 'name', 'What should we call you?')}

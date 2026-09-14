@@ -6,8 +6,8 @@
 .auth-main { max-width: 1180px; margin: 15px auto 45px; display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(35px, 6vw, 85px); padding: 0 35px; align-items: center; }
 .auth-story { padding: 45px 0; }
 .auth-eyebrow { font: 500 10px 'Fira Code', monospace; letter-spacing: .14em; color: var(--ui-accent); margin-bottom: 20px; }
-.auth-story h1 { font-size: clamp(40px, 4.7vw, 63px); letter-spacing: -.055em; line-height: 1.12; font-weight: 750; margin: 0; }
-.auth-story h1 em { font-style: normal; color: var(--ui-accent); }
+.auth-story h2 { font-size: clamp(40px, 4.7vw, 63px); letter-spacing: -.055em; line-height: 1.12; font-weight: 750; margin: 0; }
+.auth-story h2 em { font-style: normal; color: var(--ui-accent); }
 .auth-story-intro { color: var(--ui-muted); font-size: 15px; line-height: 1.8; max-width: 330px; margin: 22px 0 28px; }
 .auth-art { position: relative; overflow: hidden; padding: 22px; border: 1px solid var(--ui-border); border-radius: 22px; background: var(--ui-surface); max-width: 450px; }
 .auth-art-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(var(--ui-border) 1px, transparent 1px), linear-gradient(90deg, var(--ui-border) 1px, transparent 1px); background-size: 22px 22px; opacity: .22; }
@@ -27,7 +27,7 @@
 .auth-form-heading { margin-top: 26px; }
 .auth-form-icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 13px; background: var(--ui-accent-soft); color: var(--ui-accent); margin-bottom: 20px; }
 .auth-form-heading .auth-eyebrow { font-size: 9px; margin-bottom: 10px; }
-.auth-form-heading h2 { font-size: clamp(25px, 2.7vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.045em; margin: 0; }
+.auth-form-heading h1 { font-size: clamp(25px, 2.7vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.045em; margin: 0; }
 .auth-form-heading > p:last-child { color: var(--ui-muted); font-size: 13px; margin: 11px 0 20px; }
 .auth-preview-note { font-size: 11px; line-height: 1.7; color: var(--ui-muted); background: var(--ui-inset); border: 1px solid var(--ui-border); padding: 12px 14px; border-radius: 10px; margin-bottom: 22px; }
 .auth-preview-note span { display: block; font: 9px 'Fira Code', monospace; letter-spacing: .1em; margin-bottom: 5px; color: var(--ui-accent); }
