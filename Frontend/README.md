@@ -1,3 +1,13 @@
+## Creator Studio frontend
+
+Run `npm run dev` from this folder. Visit `/studio`, `/signup`, or `/signin`.
+
+- Appearance controls offer System, Light, and Dark. System follows `prefers-color-scheme`; explicit preferences persist in `localStorage` under `shoritfy.theme`. An inline startup script applies the choice before the app renders.
+- UI colors live in `src/theme/theme.css` and are exposed to existing Tailwind components through semantic `app-*` colors in `src/index.css`. Video canvases retain their dark presentation.
+- Sign up and Sign in are **frontend previews**. They validate fields and support password visibility, but never submit credentials, store passwords, or create accounts/sessions. The current backend login/register routes are placeholders. Replace the preview branch in `AuthPage.tsx` only after a real authentication contract is available.
+
+Checks: `npm run build` and `npm run lint`.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.

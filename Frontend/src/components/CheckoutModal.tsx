@@ -30,33 +30,33 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, p
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="nord-card rounded-3xl p-6 sm:p-8 max-w-md w-full border border-slate-700 shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-app-surface/80 backdrop-blur-md animate-fadeIn">
+      <div className="nord-card rounded-3xl p-6 sm:p-8 max-w-md w-full border border-app-border shadow-2xl relative">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-slate-900 text-slate-400 hover:text-white border border-slate-800 transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-full bg-app-surface text-app-muted hover:text-app-text border border-app-border transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
 
         {!isSuccess ? (
           <div>
-            <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="flex items-center gap-2 text-app-accent font-mono text-xs font-bold uppercase tracking-wider mb-2">
               <Zap className="w-4 h-4" /> Shortify Subscription
             </div>
 
-            <h3 className="text-2xl font-extrabold font-display text-white mb-1">
+            <h3 className="text-2xl font-extrabold font-display text-app-text mb-1">
               Upgrade to {planName}
             </h3>
-            <p className="text-slate-400 text-xs font-mono mb-6">
-              Total due today: <strong className="text-cyan-300 font-bold text-sm">{price}</strong> (7-day free trial, cancel anytime).
+            <p className="text-app-muted text-xs font-mono mb-6">
+              Total due today: <strong className="text-app-accent font-bold text-sm">{price}</strong> (7-day free trial, cancel anytime).
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-mono font-semibold text-app-muted mb-1.5">
                   Account Email
                 </label>
                 <input
@@ -65,15 +65,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, p
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="creator@channel.com"
-                  className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 font-mono"
+                  className="w-full px-4 py-3 bg-app-surface border border-app-border rounded-xl text-sm text-app-text focus:outline-none focus:border-cyan-500 font-mono"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono font-semibold text-slate-300 mb-1.5 flex items-center justify-between">
+                <label className="block text-xs font-mono font-semibold text-app-muted mb-1.5 flex items-center justify-between">
                   <span>Card Details</span>
-                  <span className="text-[10px] text-slate-500 flex items-center gap-1">
-                    <Lock className="w-3 h-3 text-emerald-400" /> 256-bit Encrypted
+                  <span className="text-[10px] text-app-subtle flex items-center gap-1">
+                    <Lock className="w-3 h-3 text-app-accent" /> 256-bit Encrypted
                   </span>
                 </label>
                 <div className="relative">
@@ -81,9 +81,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, p
                     type="text"
                     required
                     placeholder="4242 •••• •••• 4242"
-                    className="w-full pl-11 pr-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 font-mono"
+                    className="w-full pl-11 pr-4 py-3 bg-app-surface border border-app-border rounded-xl text-sm text-app-text focus:outline-none focus:border-cyan-500 font-mono"
                   />
-                  <CreditCard className="w-4 h-4 text-slate-500 absolute left-4 top-3.5" />
+                  <CreditCard className="w-4 h-4 text-app-subtle absolute left-4 top-3.5" />
                 </div>
               </div>
 
@@ -92,13 +92,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, p
                   type="text"
                   required
                   placeholder="MM / YY"
-                  className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 font-mono text-center"
+                  className="w-full px-4 py-3 bg-app-surface border border-app-border rounded-xl text-sm text-app-text focus:outline-none focus:border-cyan-500 font-mono text-center"
                 />
                 <input
                   type="text"
                   required
                   placeholder="CVC"
-                  className="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 font-mono text-center"
+                  className="w-full px-4 py-3 bg-app-surface border border-app-border rounded-xl text-sm text-app-text focus:outline-none focus:border-cyan-500 font-mono text-center"
                 />
               </div>
 
@@ -111,18 +111,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose, p
               </button>
             </form>
 
-            <div className="mt-4 pt-4 border-t border-slate-900 flex items-center justify-center gap-2 text-[11px] font-mono text-slate-400">
-              <ShieldCheck className="w-4 h-4 text-emerald-400" /> 100% Satisfaction Guarantee. Cancel in 1-click.
+            <div className="mt-4 pt-4 border-t border-app-border flex items-center justify-center gap-2 text-[11px] font-mono text-app-muted">
+              <ShieldCheck className="w-4 h-4 text-app-accent" /> 100% Satisfaction Guarantee. Cancel in 1-click.
             </div>
           </div>
         ) : (
           <div className="text-center py-6">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400/50 text-app-accent flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h3 className="text-2xl font-extrabold font-display text-white mb-2">Welcome to Shortify Pro!</h3>
-            <p className="text-sm font-mono text-slate-300 mb-6">
-              Your account ({email || 'creator@channel.com'}) has been upgraded to <strong className="text-cyan-400">{planName}</strong>.
+            <h3 className="text-2xl font-extrabold font-display text-app-text mb-2">Welcome to Shortify Pro!</h3>
+            <p className="text-sm font-mono text-app-muted mb-6">
+              Your account ({email || 'creator@channel.com'}) has been upgraded to <strong className="text-app-accent">{planName}</strong>.
             </p>
             <button
               onClick={onClose}

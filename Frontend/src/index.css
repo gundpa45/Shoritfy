@@ -1,4 +1,18 @@
 @import "tailwindcss";
+@import "./theme/theme.css";
+
+@theme inline {
+  --color-app-bg: var(--ui-bg);
+  --color-app-surface: var(--ui-surface);
+  --color-app-raised: var(--ui-raised);
+  --color-app-inset: var(--ui-inset);
+  --color-app-border: var(--ui-border);
+  --color-app-border-strong: var(--ui-border-strong);
+  --color-app-text: var(--ui-text);
+  --color-app-muted: var(--ui-muted);
+  --color-app-subtle: var(--ui-subtle);
+  --color-app-accent: var(--ui-accent);
+}
 
 @layer base {
   :root {
@@ -8,64 +22,64 @@
 
   body {
     font-family: var(--font-sans);
-    background-color: #000000;
-    color: #F4F4F5;
+    background-color: var(--ui-bg);
+    color: var(--ui-text);
     overflow-x: hidden;
   }
 }
 
 /* Nordcraft Pitch Black Base */
 .nord-bg {
-  background-color: #000000;
+  background-color: var(--ui-bg);
 }
 
 /* Nordcraft Clean Card */
 .nord-card {
-  background: #09090B;
-  border: 1px solid #27272A;
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
   border-radius: 20px;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .nord-card:hover {
-  border-color: #3F3F46;
+  border-color: var(--ui-border-strong);
 }
 
 /* Nordcraft Cyan Accent Button */
 .btn-nord-cyan {
-  background-color: #8BEAD8;
-  color: #000000;
+  background-color: var(--ui-primary);
+  color: var(--ui-on-primary);
   font-weight: 600;
   border-radius: 12px;
   transition: all 0.2s ease;
 }
 
 .btn-nord-cyan:hover {
-  background-color: #A3F3E4;
+  background-color: var(--ui-primary-hover);
   transform: translateY(-1px);
 }
 
 /* Nordcraft Dark Button */
 .btn-nord-dark {
-  background-color: #18181B;
-  border: 1px solid #27272A;
-  color: #F4F4F5;
+  background-color: var(--ui-raised);
+  border: 1px solid var(--ui-border);
+  color: var(--ui-text);
   border-radius: 12px;
   transition: all 0.2s ease;
 }
 
 .btn-nord-dark:hover {
-  background-color: #27272A;
-  border-color: #3F3F46;
+  background-color: var(--ui-raised);
+  border-color: var(--ui-border-strong);
 }
 
 /* Side Gallery Fading Overlay */
 .hero-side-fade-left {
-  background: linear-gradient(to right, #000000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+  background: linear-gradient(to right, var(--ui-bg) 0%, color-mix(in srgb, var(--ui-bg) 70%, transparent) 40%, transparent 100%);
 }
 
 .hero-side-fade-right {
-  background: linear-gradient(to left, #000000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+  background: linear-gradient(to left, var(--ui-bg) 0%, color-mix(in srgb, var(--ui-bg) 70%, transparent) 40%, transparent 100%);
 }
 
 /* Custom Scrollbar */
@@ -75,16 +89,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--ui-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272A;
+  background: var(--ui-border);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3F3F46;
+  background: var(--ui-border-strong);
 }
 
 /* Animations */
@@ -123,7 +137,7 @@
   background: transparent;
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #27272A;
+  background: var(--ui-border);
   border-radius: 9999px;
 }
 

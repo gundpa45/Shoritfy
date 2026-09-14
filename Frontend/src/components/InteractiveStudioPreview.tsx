@@ -55,26 +55,26 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
 
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-16 relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#050505] border border-[#27272A] shadow-[0_0_15px_rgba(139,234,216,0.1)] text-[#8BEAD8] text-xs font-mono font-bold uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-app-bg border border-app-border shadow-[0_0_15px_rgba(139,234,216,0.1)] text-app-accent text-xs font-mono font-bold uppercase tracking-widest mb-6">
           <Sparkles className="w-3.5 h-3.5" /> Interactive Output Studio
         </div>
-        <h2 className="text-4xl sm:text-6xl font-extrabold text-white font-display tracking-tight mb-4 drop-shadow-2xl">
+        <h2 className="text-4xl sm:text-6xl font-extrabold text-app-text font-display tracking-tight mb-4 drop-shadow-2xl">
           Preview & Customize Your Viral Shorts
         </h2>
-        <p className="text-zinc-400 text-lg sm:text-xl font-light">
+        <p className="text-app-muted text-lg sm:text-xl font-light">
           Test real video playback, switch Alex Hormozi caption styles, toggle 9:16 framing, and export in 4K immediately.
         </p>
       </div>
 
       {/* Main Studio Card */}
-      <div className="rounded-[2.5rem] p-2 relative overflow-hidden bg-gradient-to-b from-[#18181B] to-[#000000] shadow-[0_0_50px_rgba(0,0,0,0.8)] z-10 border border-[#27272A]">
+      <div className="rounded-[2.5rem] p-2 relative overflow-hidden bg-gradient-to-b from-app-raised to-app-bg shadow-[0_0_50px_rgba(0,0,0,0.8)] z-10 border border-app-border">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 mix-blend-overlay"></div>
         
         <div className="rounded-[2.25rem] bg-[#050507] p-6 lg:p-10 relative overflow-hidden h-full flex flex-col">
           
           {/* Clip Tabs */}
-          <div className="flex items-center gap-4 overflow-x-auto pb-6 mb-10 border-b border-[#18181B] scrollbar-none">
-            <span className="text-xs font-mono text-zinc-500 font-bold uppercase shrink-0 mr-2 flex items-center gap-2">
+          <div className="flex items-center gap-4 overflow-x-auto pb-6 mb-10 border-b border-app-border scrollbar-none">
+            <span className="text-xs font-mono text-app-subtle font-bold uppercase shrink-0 mr-2 flex items-center gap-2">
               <Flame className="w-4 h-4 text-amber-500" /> AI Selected Clips:
             </span>
             {MOCK_CLIPS.map((clip) => (
@@ -83,14 +83,14 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                 onClick={() => setSelectedClip(clip)}
                 className={`group px-5 py-3 rounded-2xl text-xs font-bold transition-all shrink-0 flex items-center gap-3 border backdrop-blur-md cursor-pointer ${
                   selectedClip.id === clip.id
-                    ? 'bg-[#18181B]/80 border-[#8BEAD8]/50 text-white shadow-[0_0_20px_rgba(139,234,216,0.15)]'
-                    : 'bg-[#000000]/40 border-[#18181B] text-zinc-500 hover:border-[#3F3F46] hover:text-zinc-300'
+                    ? 'bg-app-raised/80 border-app-accent/50 text-app-text shadow-[0_0_20px_rgba(139,234,216,0.15)]'
+                    : 'bg-app-bg/40 border-app-border text-app-subtle hover:border-app-border-strong hover:text-app-muted'
                 }`}
               >
-                <div className={`w-2.5 h-2.5 rounded-full transition-colors ${selectedClip.id === clip.id ? 'bg-[#8BEAD8] shadow-[0_0_8px_rgba(139,234,216,0.8)]' : 'bg-zinc-700'}`}></div>
+                <div className={`w-2.5 h-2.5 rounded-full transition-colors ${selectedClip.id === clip.id ? 'bg-[#8BEAD8] shadow-[0_0_8px_rgba(139,234,216,0.8)]' : 'bg-app-raised'}`}></div>
                 <span className="truncate max-w-[200px] font-display">{clip.title}</span>
                 <span className={`px-2 py-1 rounded-lg text-[10px] font-mono border ${
-                  selectedClip.id === clip.id ? 'bg-[#8BEAD8]/10 text-[#8BEAD8] border-[#8BEAD8]/20' : 'bg-[#18181B] text-zinc-500 border-transparent group-hover:text-zinc-400'
+                  selectedClip.id === clip.id ? 'bg-[#8BEAD8]/10 text-app-accent border-app-accent/20' : 'bg-app-raised text-app-subtle border-transparent group-hover:text-app-muted'
                 }`}>
                   {clip.viralityScore} / 100
                 </span>
@@ -106,16 +106,16 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
               {/* Premium Glow Behind Phone */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[550px] bg-[#8BEAD8]/20 rounded-[50px] blur-[80px] z-0 pointer-events-none" />
               
-              <div className="relative w-full max-w-[340px] aspect-[9/16] bg-[#000000] rounded-[50px] border-[6px] border-[#18181B] shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden z-10 group">
+              <div className="theme-media relative w-full max-w-[340px] aspect-[9/16] bg-app-bg rounded-[50px] border-[6px] border-app-border shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex flex-col justify-between overflow-hidden z-10 group">
                 
                 {/* iPhone Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-[#18181B] rounded-b-3xl z-40 flex items-center justify-center">
-                  <div className="w-16 h-4 rounded-full bg-[#000000] shadow-inner flex items-center justify-end px-1.5">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-app-raised rounded-b-3xl z-40 flex items-center justify-center">
+                  <div className="w-16 h-4 rounded-full bg-app-bg shadow-inner flex items-center justify-end px-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-[#1A1A1A] border border-[#333]"></div>
                   </div>
                 </div>
 
-                <div className="relative w-full h-full rounded-[44px] overflow-hidden bg-black flex items-center justify-center">
+                <div className="theme-media relative w-full h-full rounded-[44px] overflow-hidden bg-black flex items-center justify-center">
                   <video
                     ref={videoRef}
                     src={selectedClip.videoUrl}
@@ -136,7 +136,7 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                     {captionStyle === 'hormozi' && (
                       <div className="inline-block bg-black/90 px-5 py-2.5 rounded-2xl border-2 border-amber-400/30 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-md transform scale-110">
                         <span className="text-2xl font-black font-display text-amber-300 uppercase tracking-tight leading-none drop-shadow-md">
-                          IF YOU FAIL <span className="text-[#8BEAD8] underline decoration-4 underline-offset-4">THE FIRST 3 SECONDS</span>
+                          IF YOU FAIL <span className="text-app-accent underline decoration-4 underline-offset-4">THE FIRST 3 SECONDS</span>
                         </span>
                       </div>
                     )}
@@ -148,13 +148,13 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                     )}
 
                     {captionStyle === 'neon' && (
-                      <div className="inline-block bg-[#050505]/80 backdrop-blur-xl text-[#8BEAD8] px-5 py-3 rounded-2xl border-2 border-[#8BEAD8]/50 font-mono font-bold text-base shadow-[0_0_20px_rgba(139,234,216,0.3)]">
+                      <div className="inline-block bg-app-bg/80 backdrop-blur-xl text-app-accent px-5 py-3 rounded-2xl border-2 border-app-accent/50 font-mono font-bold text-base shadow-[0_0_20px_rgba(139,234,216,0.3)]">
                         ⚡ AI Retention Spike: 98.4%
                       </div>
                     )}
 
                     {captionStyle === 'minimal' && (
-                      <div className="inline-block text-white font-medium text-lg tracking-wide bg-black/40 backdrop-blur-lg px-5 py-2 rounded-xl border border-white/10">
+                      <div className="inline-block text-app-text font-medium text-lg tracking-wide bg-black/40 backdrop-blur-lg px-5 py-2 rounded-xl border border-white/10">
                         Dopamine anticipation drives action.
                       </div>
                     )}
@@ -164,7 +164,7 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                     onClick={togglePlay}
                     className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-all cursor-pointer z-30 opacity-0 group-hover:opacity-100 backdrop-blur-[2px]"
                   >
-                    <div className="w-16 h-16 rounded-full bg-[#000000]/80 backdrop-blur-md border border-[#8BEAD8]/40 text-[#8BEAD8] flex items-center justify-center shadow-[0_0_30px_rgba(139,234,216,0.2)] transform hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 rounded-full bg-app-bg/80 backdrop-blur-md border border-app-accent/40 text-app-accent flex items-center justify-center shadow-[0_0_30px_rgba(139,234,216,0.2)] transform hover:scale-110 transition-transform">
                       {isPlaying ? <Pause className="w-7 h-7" /> : <Play className="w-7 h-7 fill-[#8BEAD8] ml-1.5" />}
                     </div>
                   </button>
@@ -179,42 +179,42 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
             <div className="lg:col-span-7 flex flex-col gap-6 lg:gap-8 h-full justify-center">
               
               {/* Info Card */}
-              <div className="p-8 rounded-[2rem] bg-gradient-to-br from-[#121215] to-[#0A0A0C] border border-[#27272A] shadow-2xl relative overflow-hidden group hover:border-[#3F3F46] transition-colors">
-                <div className="absolute top-0 right-0 p-6 opacity-10 text-white transform translate-x-4 -translate-y-4 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
+              <div className="p-8 rounded-[2rem] bg-gradient-to-br from-app-raised to-app-surface border border-app-border shadow-2xl relative overflow-hidden group hover:border-app-border-strong transition-colors">
+                <div className="absolute top-0 right-0 p-6 opacity-10 text-app-text transform translate-x-4 -translate-y-4 group-hover:scale-110 transition-transform duration-500 pointer-events-none">
                   <Maximize2 className="w-32 h-32" />
                 </div>
 
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-4 relative z-10">
-                  <span className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#8BEAD8]/20 to-[#8BEAD8]/5 text-[#8BEAD8] text-xs font-mono font-bold border border-[#8BEAD8]/20 flex items-center gap-2 shadow-[0_0_15px_rgba(139,234,216,0.1)]">
+                  <span className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-[#8BEAD8]/20 to-[#8BEAD8]/5 text-app-accent text-xs font-mono font-bold border border-app-accent/20 flex items-center gap-2 shadow-[0_0_15px_rgba(139,234,216,0.1)]">
                     <Sparkles className="w-3.5 h-3.5" /> Score: {selectedClip.viralityScore}/100
                   </span>
-                  <span className="text-xs font-mono text-zinc-500 bg-[#000000] px-4 py-1.5 rounded-xl border border-[#18181B]">
-                    Est. Views: <strong className="text-white">{selectedClip.viewsEstimate}</strong>
+                  <span className="text-xs font-mono text-app-subtle bg-app-bg px-4 py-1.5 rounded-xl border border-app-border">
+                    Est. Views: <strong className="text-app-text">{selectedClip.viewsEstimate}</strong>
                   </span>
                 </div>
 
-                <h3 className="text-2xl lg:text-3xl font-extrabold font-display text-white mb-3 tracking-tight relative z-10 leading-tight">
+                <h3 className="text-2xl lg:text-3xl font-extrabold font-display text-app-text mb-3 tracking-tight relative z-10 leading-tight">
                   {selectedClip.title}
                 </h3>
-                <p className="text-zinc-400 text-sm font-sans mb-6 leading-relaxed relative z-10 border-l-2 border-[#8BEAD8]/30 pl-4 bg-gradient-to-r from-[#8BEAD8]/5 to-transparent py-2 rounded-r-xl">
-                  <strong className="text-[#8BEAD8] font-mono block mb-1 text-xs uppercase tracking-wider">AI Analysis:</strong>
+                <p className="text-app-muted text-sm font-sans mb-6 leading-relaxed relative z-10 border-l-2 border-app-accent/30 pl-4 bg-gradient-to-r from-[#8BEAD8]/5 to-transparent py-2 rounded-r-xl">
+                  <strong className="text-app-accent font-mono block mb-1 text-xs uppercase tracking-wider">AI Analysis:</strong>
                   {selectedClip.hookSummary}
                 </p>
 
-                <div className="flex flex-wrap items-center gap-2 pt-5 border-t border-[#18181B] relative z-10">
-                  <span className="text-xs text-zinc-500 font-mono flex items-center gap-1.5 uppercase tracking-wider mr-2">
-                    <Hash className="w-3.5 h-3.5 text-[#8BEAD8]" /> Tags
+                <div className="flex flex-wrap items-center gap-2 pt-5 border-t border-app-border relative z-10">
+                  <span className="text-xs text-app-subtle font-mono flex items-center gap-1.5 uppercase tracking-wider mr-2">
+                    <Hash className="w-3.5 h-3.5 text-app-accent" /> Tags
                   </span>
                   {selectedClip.hashtags.map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 rounded-xl bg-[#000000] text-zinc-300 text-[11px] font-mono border border-[#27272A] shadow-inner">
+                    <span key={tag} className="px-3 py-1.5 rounded-xl bg-app-bg text-app-muted text-[11px] font-mono border border-app-border shadow-inner">
                       {tag}
                     </span>
                   ))}
                   <button
                     onClick={handleCopyHashtags}
-                    className="ml-auto px-4 py-1.5 rounded-xl bg-[#18181B] hover:bg-[#27272A] text-zinc-300 text-xs font-mono font-bold flex items-center gap-2 transition-colors cursor-pointer border border-[#3F3F46]/50"
+                    className="ml-auto px-4 py-1.5 rounded-xl bg-app-raised hover:bg-app-border text-app-muted text-xs font-mono font-bold flex items-center gap-2 transition-colors cursor-pointer border border-app-border-strong/50"
                   >
-                    {copiedHashtags ? <Check className="w-3.5 h-3.5 text-[#8BEAD8]" /> : <Copy className="w-3.5 h-3.5 text-zinc-400" />}
+                    {copiedHashtags ? <Check className="w-3.5 h-3.5 text-app-accent" /> : <Copy className="w-3.5 h-3.5 text-app-muted" />}
                     {copiedHashtags ? 'Copied!' : 'Copy All'}
                   </button>
                 </div>
@@ -224,9 +224,9 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                 
                 {/* Caption Style */}
-                <div className="p-6 rounded-[2rem] bg-[#0A0A0C] border border-[#27272A] shadow-lg">
-                  <label className="block text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Type className="w-4 h-4 text-[#8BEAD8]" /> Caption Style
+                <div className="p-6 rounded-[2rem] bg-app-surface border border-app-border shadow-lg">
+                  <label className="block text-xs font-mono font-bold text-app-subtle uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Type className="w-4 h-4 text-app-accent" /> Caption Style
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     {[
@@ -240,8 +240,8 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                         onClick={() => setCaptionStyle(style.id as any)}
                         className={`py-3 px-2 rounded-xl text-center text-xs font-bold font-display uppercase tracking-wide border transition-all cursor-pointer ${
                           captionStyle === style.id
-                            ? 'bg-gradient-to-br from-[#8BEAD8]/10 to-transparent border-[#8BEAD8] text-[#8BEAD8] shadow-[0_0_15px_rgba(139,234,216,0.15)]'
-                            : 'bg-[#000000] border-[#18181B] text-zinc-500 hover:border-[#3F3F46] hover:text-white'
+                            ? 'bg-gradient-to-br from-[#8BEAD8]/10 to-transparent border-app-accent text-app-accent shadow-[0_0_15px_rgba(139,234,216,0.15)]'
+                            : 'bg-app-bg border-app-border text-app-subtle hover:border-app-border-strong hover:text-app-text'
                         }`}
                       >
                         {style.name}
@@ -251,9 +251,9 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                 </div>
 
                 {/* Aspect Ratio */}
-                <div className="p-6 rounded-[2rem] bg-[#0A0A0C] border border-[#27272A] shadow-lg">
-                  <label className="block text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Scissors className="w-4 h-4 text-[#8BEAD8]" /> AI Smart Crop
+                <div className="p-6 rounded-[2rem] bg-app-surface border border-app-border shadow-lg">
+                  <label className="block text-xs font-mono font-bold text-app-subtle uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <Scissors className="w-4 h-4 text-app-accent" /> AI Smart Crop
                   </label>
                   <div className="grid grid-cols-3 gap-3">
                     {[
@@ -266,8 +266,8 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
                         onClick={() => setAspectRatio(ratio.id as any)}
                         className={`py-3 px-1 rounded-xl text-center text-xs font-bold font-mono border transition-all cursor-pointer ${
                           aspectRatio === ratio.id
-                            ? 'bg-gradient-to-br from-[#8BEAD8]/10 to-transparent border-[#8BEAD8] text-[#8BEAD8] shadow-[0_0_15px_rgba(139,234,216,0.15)]'
-                            : 'bg-[#000000] border-[#18181B] text-zinc-500 hover:border-[#3F3F46] hover:text-white'
+                            ? 'bg-gradient-to-br from-[#8BEAD8]/10 to-transparent border-app-accent text-app-accent shadow-[0_0_15px_rgba(139,234,216,0.15)]'
+                            : 'bg-app-bg border-app-border text-app-subtle hover:border-app-border-strong hover:text-app-text'
                         }`}
                       >
                         {ratio.name}
@@ -288,9 +288,9 @@ export const InteractiveStudioPreview = ({ onOpenPricing, apiData }: StudioPrevi
 
                 <button
                   onClick={onOpenPricing}
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#121215] border border-[#27272A] hover:bg-[#18181B] hover:border-[#3F3F46] text-white text-sm font-bold transition-all flex items-center justify-center gap-3 cursor-pointer font-display"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-app-raised border border-app-border hover:bg-app-raised hover:border-app-border-strong text-app-text text-sm font-bold transition-all flex items-center justify-center gap-3 cursor-pointer font-display"
                 >
-                  <Share2 className="w-4 h-4 text-[#8BEAD8]" /> Auto-Publish
+                  <Share2 className="w-4 h-4 text-app-accent" /> Auto-Publish
                 </button>
               </div>
 

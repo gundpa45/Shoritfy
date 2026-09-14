@@ -1,28 +1,28 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { InteractivePipelineLoader } from '../components/InteractivePipelineLoader';
+import { ProcessingState } from '../components/ProcessingState';
 import { StudioResults } from '../components/StudioResults';
+import type { ApiData } from '../components/StudioResults';
 
-interface UrlPageProps {
-  onOpenPricing: () => void;
-}
-
-export const UrlPage = ({ onOpenPricing }: UrlPageProps) => {
+export const UrlPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const url = searchParams.get('video') || '';
 
-  const [pipelineFinished, setPipelineFinished] = useState(false);
-  const [apiData, setApiData] = useState<any>(null);
+  const [apiData, setApiData] = useState<ApiData | null>(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (!url) return;
+    const controller = new AbortController();
+    setApiData(null);
+    setError('');
 
     const fetchClips = async () => {
       try {
         const response = await fetch('http://localhost:3200/api/v1/url', {
           method: 'POST',
+          signal: controller.signal,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -37,13 +37,17 @@ export const UrlPage = ({ onOpenPricing }: UrlPageProps) => {
 
         const data = await response.json();
         setApiData(data);
-      } catch (err: any) {
-        setError(err.message || 'Something went wrong');
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : 'Something went wrong');
       }
     };
 
     fetchClips();
+    return () => controller.abort();
   }, [url]);
+
+  if (!url) return <div className="min-h-[60vh] grid place-items-center text-center px-4"><div><h1 className="text-2xl font-bold mb-3">Start with a YouTube link</h1><button className="btn-nord-cyan px-5 py-3" onClick={() => navigate('/studio')}>Open Creator Studio</button></div></div>;
 
   if (error) {
     return (
@@ -55,7 +59,7 @@ export const UrlPage = ({ onOpenPricing }: UrlPageProps) => {
           <h2 className="text-xl text-red-400 font-bold font-display mb-2">Processing Failed</h2>
           <p className="text-red-200/70 text-sm mb-6">{error}</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/studio')}
             className="px-6 py-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-300 text-sm font-semibold hover:bg-red-500/20 transition-colors cursor-pointer"
           >
             ← Try Another Video
@@ -65,32 +69,14 @@ export const UrlPage = ({ onOpenPricing }: UrlPageProps) => {
     );
   }
 
-  // Show the results page when BOTH the pipeline animation and API call are done
-  const isReady = pipelineFinished && apiData;
-
-  if (isReady) {
+  if (apiData) {
     return (
       <StudioResults
         apiData={apiData}
-        onBack={() => navigate('/')}
+        onBack={() => navigate('/studio')}
       />
     );
   }
 
-  // Show the pipeline loader while processing
-  return (
-    <div className="relative">
-      <InteractivePipelineLoader
-        url={url}
-        onComplete={() => setPipelineFinished(true)}
-      />
-      {pipelineFinished && !apiData && (
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center text-[#8BEAD8] font-mono text-sm font-bold uppercase tracking-widest animate-pulse pb-10 flex items-center gap-3 bg-[#000000]/80 backdrop-blur-md px-6 py-3 rounded-full border border-[#8BEAD8]/30 shadow-[0_0_20px_rgba(139,234,216,0.2)]">
-          <span className="w-2 h-2 rounded-full bg-[#8BEAD8]"></span>
-          Awaiting AI models — this may take a few minutes...
-          <span className="w-2 h-2 rounded-full bg-[#8BEAD8]"></span>
-        </div>
-      )}
-    </div>
-  );
+  return <ProcessingState url={url} />;
 };

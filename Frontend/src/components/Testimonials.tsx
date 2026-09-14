@@ -26,16 +26,16 @@ const TESTIMONIALS = [
 
 export const Testimonials = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/80">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-app-border/80">
       
       <div className="text-center max-w-3xl mx-auto mb-14">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold uppercase tracking-wider mb-4">
           <Flame className="w-3.5 h-3.5" /> Creator Success Stories
         </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-display tracking-tight">
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-app-text font-display tracking-tight">
           Trusted by <span className="text-amber-400">Top Content Creators</span>
         </h2>
-        <p className="text-slate-400 text-base sm:text-lg mt-3">
+        <p className="text-app-muted text-base sm:text-lg mt-3">
           See how podcasters, agencies, and YouTubers scale their short-form content output with Shortify AI.
         </p>
       </div>
@@ -44,7 +44,7 @@ export const Testimonials = () => {
         {TESTIMONIALS.map((item) => (
           <div
             key={item.name}
-            className="nord-card rounded-3xl p-6 lg:p-8 flex flex-col justify-between border border-slate-800 hover:border-amber-500/40 transition-all duration-300 relative"
+            className="nord-card rounded-3xl p-6 lg:p-8 flex flex-col justify-between border border-app-border hover:border-amber-500/40 transition-all duration-300 relative"
           >
             <Quote className="absolute top-6 right-6 w-8 h-8 text-slate-800 pointer-events-none" />
 
@@ -53,20 +53,20 @@ export const Testimonials = () => {
                 {item.metric}
               </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-sans mb-6 italic">
+              <p className="text-app-muted text-sm leading-relaxed font-sans mb-6 italic">
                 "{item.quote}"
               </p>
             </div>
 
-            <div className="flex items-center gap-3 pt-4 border-t border-slate-900">
+            <div className="flex items-center gap-3 pt-4 border-t border-app-border">
               <img
                 src={item.avatar}
                 alt={item.name}
                 className="w-11 h-11 rounded-full object-cover border border-amber-400/50"
               />
               <div>
-                <h4 className="text-sm font-bold text-white font-display">{item.name}</h4>
-                <p className="text-xs text-slate-400 font-mono">{item.role}</p>
+                <h4 className="text-sm font-bold text-app-text font-display">{item.name}</h4>
+                <p className="text-xs text-app-muted font-mono">{item.role}</p>
               </div>
             </div>
           </div>
