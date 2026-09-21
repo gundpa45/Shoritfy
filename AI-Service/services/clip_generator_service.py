@@ -102,7 +102,7 @@ def generate_clips(video_path: str):
             error(f"Chunk {index} Failed")
 
             raise Exception(
-                f"Invalid response received from Qwen: {e}"
+                f"Invalid response received from Gemini: {e}"
             )
 
     section("🏆 Ranking Clips")

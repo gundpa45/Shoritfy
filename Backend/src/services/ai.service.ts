@@ -1,15 +1,16 @@
 import axios from "axios";
-
-const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://127.0.0.1:8000";
+import config from "../config/config.js";
 
 async function generateClips(videoPath: string) {
   try {
+    console.log(`🤖 Calling AI Service at: ${config.AI_SERVICE_URL}`);
+
     const response = await axios.post(
-      `${AI_SERVICE_URL}/clips`,
+      `${config.AI_SERVICE_URL}/clips`,
       {
         video_path: videoPath
       },
-      { timeout: 300000 } // 5 minutes timeout for AI processing
+      { timeout: 600000 } // 10 minutes timeout for AI processing (Whisper + Gemini + FFmpeg)
     );
 
     return response.data;

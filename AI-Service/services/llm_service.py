@@ -1,14 +1,15 @@
 import json
 import time
 
-from models.ollama_model import client
+from models.gemini_model import client, config
 from prompts.clip_prompt import SYSTEM_PROMPT
 
 
 def analyze_transcript(segments):
-    # -----------------------------
+    """
+    Analyze transcript segments using Google Gemini to find viral moments.
+    """
     # Build transcript efficiently
-    # -----------------------------
     transcript_lines = []
 
     for segment in segments:
@@ -25,49 +26,29 @@ def analyze_transcript(segments):
 
     start_time = time.perf_counter()
 
-    response = client.chat(
-        model="qwen2.5:7b",
+    # Combine system prompt and user transcript into a single prompt
+    full_prompt = f"{SYSTEM_PROMPT}\n\nHere is the transcript:\n\n{transcript}"
 
-        format="json",
-
-        options={
-        "temperature":0,
-        "num_predict":256,
-        "num_ctx":2048,
-        "stop":["<|im_end|>"]
-         },
-
-        messages=[
-            {
-                "role": "system",
-                "content": SYSTEM_PROMPT
-            },
-            {
-                "role": "user",
-                "content": transcript
-            }
-        ]
+    response = client.models.generate_content(
+        model='gemini-2.5-flash',
+        contents=full_prompt,
+        config=config,
     )
 
     end_time = time.perf_counter()
+    print(f"Gemini Time: {end_time - start_time:.2f} sec")
 
-    print(f"LLM Time: {end_time-start_time:.2f} sec")
+    content = response.text
 
     print("=" * 60)
-    print("JSON Returned By Ollama")
+    print("JSON Returned By Gemini")
     print("=" * 60)
-    print(response["message"]["content"])
-    print("=" * 60)
-
-    content = response["message"]["content"]
-
     print(content)
+    print("=" * 60)
 
     try:
         return json.loads(content)
-
     except json.JSONDecodeError:
         raise Exception(
-            "Ollama returned incomplete JSON.\n\n"
-            + content
-    )
+            "Gemini returned invalid JSON.\n\n" + content
+        )

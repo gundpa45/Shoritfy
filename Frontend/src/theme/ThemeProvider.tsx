@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { ThemeContext, type ThemePreference } from './theme-context';
 
-const storageKey = 'shoritfy.theme';
+const storageKey = 'shortify.theme';
 
 function readPreference(): ThemePreference {
   try {

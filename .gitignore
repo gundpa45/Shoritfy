@@ -1,11 +1,23 @@
 node_modules/
 Backend/node_modules/
-Frontend/node_modules/
+frontend/node_modules/
 .env
+Backend/.env
+AI-Service/.env
+frontend/.env.production
 .DS_Store
 dist/
 build/
 temp/
 AI-Service/__pycache__/
-Backend/__pycache__/
+AI-Service/venv/
+AI-Service/.venv/
+AI-Service/outputs/
+Backend/generated/
+*.part
+*.pyc
 
+# Large test/media files
+*.mp3
+*.mp4
+*.webm

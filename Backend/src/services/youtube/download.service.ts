@@ -2,6 +2,24 @@ import youtubedl from "yt-dlp-exec";
 import path from "path";
 import fs from "fs";
 
+/**
+ * Clean up any leftover .part files from previous failed downloads.
+ */
+function cleanPartFiles(dir: string, videoId: string) {
+    if (!fs.existsSync(dir)) return;
+    const partFiles = fs.readdirSync(dir).filter(
+        (f) => f.startsWith(videoId) && f.endsWith(".part")
+    );
+    for (const pf of partFiles) {
+        try {
+            fs.unlinkSync(path.join(dir, pf));
+            console.log(`🧹 Cleaned up partial file: ${pf}`);
+        } catch {
+            // ignore cleanup errors
+        }
+    }
+}
+
 async function downloadAudio(url: string, videoId: string) {
     const outputDir = path.join(process.cwd(), "..", "temp", "audio");
 
@@ -18,24 +36,42 @@ async function downloadAudio(url: string, videoId: string) {
         return finalPath;
     }
 
-    await youtubedl(url, {
-        extractAudio: true,
-        audioFormat: "mp3",
-        output: outputPath,
-        noPlaylist: true,
+    // Clean up any stale .part files from previous failed attempts
+    cleanPartFiles(outputDir, videoId);
 
-        // ── Anti-403 & reliability flags ──
-        forceOverwrites: true,          // Prevents WinError 32 file-lock crashes
-        noCheckCertificates: true,      // Avoid SSL issues on some networks
-        preferFreeFormats: true,        // Better compatibility
-        addHeader: [                    // Mimic a real browser request
-            "User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-            "Accept-Language:en-US,en;q=0.9",
-        ],
-        retries: 3,                     // Retry on transient failures
-        jsRuntimes: "node",             // Required: yt-dlp needs Node to decrypt YouTube's JS cipher
-    });
+    console.log("⬇️  Downloading audio...");
 
+    try {
+        await (youtubedl as any)(url, {
+            extractAudio: true,
+            audioFormat: "mp3",
+            output: outputPath,
+            noPlaylist: true,
+
+            // ── Anti-403 & reliability flags ──
+            forceOverwrites: true,
+            noCheckCertificates: true,
+            preferFreeFormats: true,
+            addHeader: [
+                "User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+                "Accept-Language:en-US,en;q=0.9",
+            ],
+            retries: 5,
+        });
+    } catch (err: any) {
+        // Surface the actual yt-dlp error message
+        const stderr = err?.stderr || err?.message || "Unknown error";
+        throw new Error(`Audio download failed: ${stderr}`);
+    }
+
+    if (!fs.existsSync(finalPath)) {
+        throw new Error(
+            `Audio download completed but file not found at ${finalPath}. ` +
+            `Check if yt-dlp produced a different extension.`
+        );
+    }
+
+    console.log(`✅ Audio downloaded: ${finalPath}`);
     return finalPath;
 }
 

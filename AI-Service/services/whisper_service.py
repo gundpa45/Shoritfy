@@ -1,6 +1,9 @@
-from models.whisper_model import model
+from models.whisper_model import get_whisper_model
+
 
 def generate_transcript(audio_path: str):
+    model = get_whisper_model()
+
     segments, info = model.transcribe(
         audio_path,
         beam_size=5

@@ -20,7 +20,7 @@ export function App() {
   const location = useLocation();
   useEffect(() => {
     const page = location.pathname === '/signup' ? 'Sign up' : location.pathname === '/signin' ? 'Sign in' : 'Creator Studio';
-    document.title = `${page} · Shoritfy`;
+    document.title = `${page} · Shortify`;
     if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
     else window.scrollTo(0, 0);
   }, [location.pathname, location.hash]);

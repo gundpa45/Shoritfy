@@ -18,7 +18,7 @@ export const Navbar = ({ viewMode, setViewMode, onOpenPricing }: NavbarProps) =>
         <div className="flex items-center justify-between h-18 gap-3">
           <Link to="/" className="flex items-center gap-2 text-app-text font-bold tracking-tight text-lg">
             <span className="w-9 h-9 rounded-xl bg-app-accent/10 text-app-accent grid place-items-center"><Sparkles size={19} /></span>
-            <span>Shoritfy<span className="text-app-accent">.ai</span></span>
+            <span>Shortify<span className="text-app-accent">.ai</span></span>
           </Link>
           <nav aria-label="Main navigation" className="hidden xl:flex items-center gap-6 text-sm text-app-muted">
             <Link to="/#features" className="hover:text-app-text">Features</Link>

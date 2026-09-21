@@ -6,8 +6,7 @@ from utils.logger import section, info, success
 # Project root (Shortify/)
 PROJECT_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..")
-)   
-
+)
 
 
 # Shared clips directory
@@ -48,16 +47,17 @@ def cut_clip(
         "ffmpeg",
         "-y",
 
+        # Seek BEFORE input for speed (input seeking)
+        "-ss",
+        str(start),
+
         # Input video
         "-i",
         video_path,
 
-        # Clip timestamps
-        "-ss",
-        str(start),
-
+        # Clip end relative to input
         "-to",
-        str(end),
+        str(end - start),
 
         # Select first video and audio stream
         "-map",
@@ -66,22 +66,15 @@ def cut_clip(
         "-map",
         "0:a:0",
 
-        # Video encoding
-        # GPU Encoding (NVIDIA NVENC)
+        # Video encoding — CPU-based (works everywhere, no GPU needed)
         "-c:v",
-        "h264_nvenc",
+        "libx264",
 
         "-preset",
-        "p5",
+        "fast",
 
-        "-rc",
-        "vbr",
-
-        "-cq",
+        "-crf",
         "23",
-
-        "-b:v",
-        "0",
 
         # Audio encoding
         "-c:a",

@@ -4,6 +4,36 @@ import { ProcessingState } from '../components/ProcessingState';
 import { StudioResults } from '../components/StudioResults';
 import type { ApiData } from '../components/StudioResults';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3200';
+
+/** Ping backend /health with retries — handles Render cold starts (30-60s wake-up). */
+async function waitForBackend(signal: AbortSignal, onStatus: (msg: string) => void): Promise<void> {
+  const MAX_RETRIES = 8;
+  const INITIAL_DELAY = 3000;
+
+  for (let i = 0; i < MAX_RETRIES; i++) {
+    if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
+
+    try {
+      onStatus(i === 0 ? 'Connecting to servers…' : `Waking up servers… (attempt ${i + 1}/${MAX_RETRIES})`);
+      const res = await fetch(`${API_URL}/health`, { signal, mode: 'cors' });
+      if (res.ok) {
+        onStatus('Servers ready — starting pipeline…');
+        return;
+      }
+    } catch (err) {
+      if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
+    }
+
+    // Exponential backoff: 3s, 4.5s, 6.75s, ...
+    const delay = INITIAL_DELAY * Math.pow(1.5, i);
+    await new Promise(resolve => setTimeout(resolve, delay));
+  }
+
+  // After all retries, try the pipeline anyway — backend might respond differently
+  onStatus('Servers may be slow — attempting pipeline anyway…');
+}
+
 export const UrlPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -11,16 +41,24 @@ export const UrlPage = () => {
 
   const [apiData, setApiData] = useState<ApiData | null>(null);
   const [error, setError] = useState('');
+  const [wakeStatus, setWakeStatus] = useState('');
 
   useEffect(() => {
     if (!url) return;
     const controller = new AbortController();
     setApiData(null);
     setError('');
+    setWakeStatus('');
 
     const fetchClips = async () => {
       try {
-        const response = await fetch('http://localhost:3200/api/v1/url', {
+        // Step 1: Wake up the backend (handles Render cold starts)
+        await waitForBackend(controller.signal, setWakeStatus);
+
+        setWakeStatus('');
+
+        // Step 2: Send the actual pipeline request
+        const response = await fetch(`${API_URL}/api/v1/url`, {
           method: 'POST',
           signal: controller.signal,
           headers: {
@@ -78,5 +116,5 @@ export const UrlPage = () => {
     );
   }
 
-  return <ProcessingState url={url} />;
+  return <ProcessingState url={url} wakeStatus={wakeStatus} />;
 };

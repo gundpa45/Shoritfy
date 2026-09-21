@@ -60,11 +60,11 @@ export function AuthPage({ mode }: { mode: 'signup' | 'signin' }) {
   return (
     <div className="auth-page">
       <header className="auth-header">
-        <Link className="auth-brand" to="/"><span><Sparkles size={20} /></span>SHORITFY<small>CREATOR STUDIO</small></Link>
+        <Link className="auth-brand" to="/"><span><Sparkles size={20} /></span>SHORTIFY<small>CREATOR STUDIO</small></Link>
         <ThemeSwitcher />
       </header>
       <main className="auth-main">
-        <section className="auth-story" aria-label="Welcome to Shoritfy">
+        <section className="auth-story" aria-label="Welcome to Shortify">
           <p className="auth-eyebrow">YOUR IDEAS. MORE POSSIBILITIES.</p>
           <h2>Big ideas.<br />Short clips.<br /><em>Your next chapter.</em></h2>
           <p className="auth-story-intro">A creative home for the moments that deserve to be seen.</p>
@@ -78,7 +78,7 @@ export function AuthPage({ mode }: { mode: 'signup' | 'signin' }) {
         </section>
         <section className="auth-form-panel" aria-labelledby="auth-title">
           <Link to="/" className="auth-back"><ArrowLeft size={15} /> Back to landing</Link>
-          <div className="auth-form-heading"><span className="auth-form-icon"><Sparkles size={23} /></span><p className="auth-eyebrow">{signingUp ? 'START YOUR NEXT CHAPTER' : 'YOUR STUDIO IS WAITING'}</p><h1 id="auth-title">{signingUp ? 'A space for your creativity.' : 'Welcome back.'}</h1><p>{signingUp ? 'Create your Shoritfy account.' : 'Sign in to your Shoritfy account.'}</p></div>
+          <div className="auth-form-heading"><span className="auth-form-icon"><Sparkles size={23} /></span><p className="auth-eyebrow">{signingUp ? 'START YOUR NEXT CHAPTER' : 'YOUR STUDIO IS WAITING'}</p><h1 id="auth-title">{signingUp ? 'A space for your creativity.' : 'Welcome back.'}</h1><p>{signingUp ? 'Create your Shortify account.' : 'Sign in to your Shortify account.'}</p></div>
           <div className="auth-preview-note"><span>FRONTEND PREVIEW</span>Account access is not connected yet. You can try the form; your details won’t be sent or saved.</div>
           <form ref={form} onSubmit={submit} noValidate>
             {signingUp && field('name', 'Your name', 'text', 'name', 'What should we call you?')}
@@ -89,11 +89,11 @@ export function AuthPage({ mode }: { mode: 'signup' | 'signin' }) {
             <button type="submit" className="auth-submit">{signingUp ? 'Create account' : 'Sign in'}<ArrowRight size={17} /></button>
             {validated && <p className="auth-validation-note" role="status">Your details pass validation. {signingUp ? 'No account was created' : 'You have not been signed in'}—account access will be available once authentication is connected.</p>}
           </form>
-          <p className="auth-switch">{signingUp ? 'Already have an account?' : 'New to Shoritfy?'} <Link to={signingUp ? '/signin' : '/signup'}>{signingUp ? 'Sign in' : 'Create an account'}</Link></p>
+          <p className="auth-switch">{signingUp ? 'Already have an account?' : 'New to Shortify?'} <Link to={signingUp ? '/signin' : '/signup'}>{signingUp ? 'Sign in' : 'Create an account'}</Link></p>
           <div className="auth-guest"><span>Just looking around?</span><Link to="/studio">Explore Creator Studio <ArrowRight size={14} /></Link></div>
         </section>
       </main>
-      <footer className="auth-footer"><span>SHORITFY · MADE FOR YOUR NEXT IDEA</span><Link to="/">Back to home</Link></footer>
+      <footer className="auth-footer"><span>SHORTIFY · MADE FOR YOUR NEXT IDEA</span><Link to="/">Back to home</Link></footer>
     </div>
   );
 }

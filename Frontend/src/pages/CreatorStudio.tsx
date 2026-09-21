@@ -39,7 +39,7 @@ export function CreatorStudio() {
         {menuOpen ? <X size={19} /> : <Menu size={19} />} Creator Studio
       </button>
       <aside className={`creator-sidebar ${menuOpen ? 'is-open' : ''}`} id="creator-nav">
-        <Link to="/" className="creator-brand"><span className="creator-brand-mark"><Sparkles size={19} /></span><span>SHORITFY<small>CREATOR STUDIO</small></span></Link>
+        <Link to="/" className="creator-brand"><span className="creator-brand-mark"><Sparkles size={19} /></span><span>SHORTIFY<small>CREATOR STUDIO</small></span></Link>
         <div className="creator-workspace"><span className="creator-avatar">S</span><div>Your workspace<small>Make something worth watching</small></div></div>
         <p className="creator-nav-label">WORKSPACE</p>
         <nav aria-label="Creator Studio">
@@ -48,7 +48,7 @@ export function CreatorStudio() {
           <a href="#samples" className="creator-nav-link" onClick={() => setMenuOpen(false)}><Film size={18} /> Sample projects</a>
         </nav>
         <div className="creator-sidebar-note"><Sparkles size={19} /><strong>A little inspiration.<br />A lot of possibility.</strong><p>Start with a video. Find a moment worth sharing.</p></div>
-        <Link className="creator-back" to="/">← Back to Shoritfy</Link>
+        <Link className="creator-back" to="/">← Back to Shortify</Link>
       </aside>
       <main className="creator-main" id="studio-content">
         <div className="creator-topline">

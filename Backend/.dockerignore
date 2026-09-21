@@ -1,0 +1,8 @@
+node_modules/
+.env
+dist/
+generated/
+*.mp3
+*.mp4
+*.part
+temp/
